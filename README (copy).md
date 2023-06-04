@@ -1,2 +1,0 @@
-# distanceOracles
-Praca lic
