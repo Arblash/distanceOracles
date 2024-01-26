@@ -1,2 +1,2 @@
 # distanceOracles
-Praca lic
+Bachelor Thesis

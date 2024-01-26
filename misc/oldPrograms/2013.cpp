@@ -16,6 +16,8 @@ int sizeOfInverseBall[maxN];
 bool isInL[maxN];
 bool isBfsVisited[maxN];
 
+vector<int> inverseBall[maxN];
+
 int main(){
     mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
     ios_base::sync_with_stdio(0);
@@ -34,7 +36,7 @@ int main(){
 
     // find set L
 
-    int alpha = 2*pow(n, 2/3) * pow(m, -1/3) * pow(log2(n), 1/3);
+    int alpha = pow(n, 2/3) * pow(m, -1/3) * pow(log2(n), 1/3)*2;
     int sampleSize = 4*n/alpha;
 
     for(int i = 0; i < n; ++i) {
@@ -137,8 +139,9 @@ int main(){
             }
             int v = currentLayer[currentLayer.size() - 1];
             currentLayer.pop_back();
-            if (distToS[i].find(v) != distToS[i].end()) 
+            if (distToS[i].find(v) != distToS[i].end()) continue;
             distToS[i][v] = dist;
+            inverseBall[v].push_back(i);
             for (int j = 0; j < neighbours[v].size(); ++j) {
                 int u = neighbours[v][j];
                 if (isInL[u]) endLoop = true;
@@ -148,6 +151,12 @@ int main(){
         }
         currentLayer.clear();
         nextLayer.clear();
+    }
+
+    for (int i = 0; i < n; ++i) {
+        for(int j = 0; j < inverseBall[i].size(); ++j) {
+            for (int k = j + 1; )
+        }
     }
 
     // TODO: finish distToS
