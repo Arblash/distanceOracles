@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool isStarLike = false;
+bool isStarLike = true;
 
 
 int main(int argc, char* argv[]) {
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     vector<pair<int, int>> possibleEdges;
 
     if (isStarLike) {
-        int stars = ceil(sqrt(n));
+        int stars = ceil(cbrt(n));
         // stars = stars * stars;
         for(int i = 0; i < stars; ++i) {
             for(int j = stars; j < n; ++j){

@@ -157,7 +157,7 @@ int main(int argc, char* argv[]){
     int B_A1S = 0;
     for (auto& ball : B_A1) B_A1S += ball.vertices.size();
     cout << B_A1S << " ";
-    int C_A1S;
+    int C_A1S = 0;
     for (auto& cluster : C_A1) C_A1S += cluster.vertices.size();
     cout << C_A1S << " ";
     int O_TableS = OTablePthashInput.size();

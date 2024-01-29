@@ -8,10 +8,11 @@ string program = "main";
 vector<int> runModes = {1000, 2005, 2008, 2010};
 string path = "tests/";
 string testPref = "test";
-vector<double> aVector = {1, 0.75, 0.5, 0.25, 0};
+// vector<double> aVector = {1, 0.75, 0.5, 0.25, 0}; // for random graphs
+vector<double> aVector = {0.3, 0.15}; // for star like graphs
 int baseN = 2000;
 int rangeN = 100;
-int numTests = 10;
+int numTests = 20;
 bool regenerate = true;
 
 string getGenerateGraphCommand(int n, double a, long long seed, int testSuf) {
@@ -115,7 +116,7 @@ int main(){
                 int OHashSpace; approx >> OHashSpace; exact >> dumpI;
 
                 preprocessingTime.push_back(prepTime);
-                answeringTime.push_back(answerTime);
+                answeringTime.push_back(answerTime / numAnswers);
                 A1Size.push_back(A1S);
                 A1DistSize.push_back(A1DistS);
                 B_A1Size.push_back(B_A1S);
