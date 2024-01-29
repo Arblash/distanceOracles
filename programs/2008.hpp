@@ -1,7 +1,7 @@
 #pragma once
 #include "global.hpp"
 
-vector<int> sample(vector<int> &X, double p) {
+vector<int> sampleBasGoySen(vector<int> &X, double p) {
     vector<int> R, X1;
     X1.assign(X.begin(), X.end());
 
@@ -13,7 +13,7 @@ vector<int> sample(vector<int> &X, double p) {
         vector<int> newX1;
         newX1.clear();
         // Once vertex is out of X1 it will never be included again, hence only elements from X1 need to be checked
-        for (int i = 0; i < X1.size(); ++i) { 
+        for (int i = 0; i < (int)X1.size(); ++i) { 
             int vertex = X1[i];
             if(p * C_R[vertex].vertices.size() > 4) newX1.push_back(C_R[vertex].x);
         }

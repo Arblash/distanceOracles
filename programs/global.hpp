@@ -5,14 +5,17 @@
 #include <chrono>
 #include <cmath>
 #include <queue>
-#include <unordered_map>
+#include <string>
+
+// #define size(x) ((int)(x).size())
 
 using namespace std;
 
-const int maxN = 10000;
-
-vector<int> neighbors[maxN];
+vector<vector<int>> neighbors;
 int n, m;
+
+// for convenience we set up maximum distance a bit lower than INT_MAX
+int maxDist = 1 << 30;
 
 struct BallElement {
     int vertex;
@@ -25,12 +28,15 @@ struct Ball {
     vector<BallElement> vertices;
 };
 
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-void initializeProgram() {
-    ios_base::sync_with_stdio(0);
+mt19937 rng;
 
+void initializeProgram(long long seed) {
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    mt19937 newRng(seed);
+    rng = newRng; // 
     cin >> n >> m;
+    neighbors.resize(n);
 
     for (int i = 0; i < m; ++i) {
         int a, b;
@@ -42,12 +48,12 @@ void initializeProgram() {
     return;
 }
 
-vector<int> uniformSample(vector<int> &X, int sampleSize) {
+vector<int> uniformSample(vector<int>& X, int sampleSize) {
     vector<int> sample;
-    if (sampleSize >= X.size()) return X;
+    if (sampleSize >= (int)X.size()) return X;
 
     for(int i = 0; i < sampleSize; ++i){
-        int samplingMax = 1*X.size() - i;
+        int samplingMax = (int)X.size() - i;
         int elementIndex = rng() % samplingMax;
         sample.push_back(X[elementIndex]);
         swap(X[elementIndex], X[samplingMax - 1]);
@@ -56,23 +62,25 @@ vector<int> uniformSample(vector<int> &X, int sampleSize) {
     return sample;
 }
 
-vector<BallElement> BFS(int r, vector<int> &xs) {
+vector<BallElement> BFS(int r, vector<int>& xs) {
     vector<BallElement> result;
     queue<BallElement> queue;
     if(r > 0) {
-        for (int i = 0; i < xs.size(); ++i) {
+        for (int i = 0; i < (int)xs.size(); ++i) {
             BallElement e;
             e.vertex = xs[i]; e.dist = 0;
             queue.push(e);
         }
     }
 
-    vector<bool> isVisited; isVisited.insert(isVisited.end(), n, false);
+    vector<bool> isVisited; isVisited.resize(n, false);
     while(!queue.empty()) {
         BallElement current = queue.front(); queue.pop();
+        if(isVisited[current.vertex]) continue;
+        else isVisited[current.vertex] = true;
         result.push_back(current);
         if(current.dist + 1 < r) {
-            for (int i = 0; i < neighbors[current.vertex].size(); ++i) {
+            for (int i = 0; i < (int)neighbors[current.vertex].size(); ++i) {
                 BallElement nextVertex;
                 nextVertex.vertex = neighbors[current.vertex][i];
                 nextVertex.dist = current.dist + 1;
@@ -92,26 +100,31 @@ Ball computeBall(int r, int x) {
     return ball;
 }
 
-vector<Ball> computeBalls(vector<int> &R) {
+vector<Ball> computeBalls(vector<int>& R) {
+    vector<BallElement> distRData = BFS(maxDist, R);
+    vector<int> distR; distR.resize(n, maxDist);
+    for (int i = 0; i < (int)distRData.size(); ++i) {
+        distR[distRData[i].vertex] = distRData[i].dist; 
+    }
     vector<Ball> balls;
-    vector<BallElement> distR = BFS(INT_MAX, R);
-    for (int i = 0; i < distR.size(); ++i) {
-        balls.push_back(computeBall(distR[i].dist, distR[i].vertex));
+    for(int i = 0; i < n; ++i) {
+        balls.push_back(computeBall(distR[i], i));
     }
     return balls;
 }
 
-vector<Ball> computeClustersFromBalls(vector<Ball> &balls) {
+vector<Ball> computeClustersFromBalls(vector<Ball>& balls) {
     vector<Ball> clusters;
     for (int i = 0; i < n; ++i) {
         Ball c;
         c.x = i;
+        c.r = -1; // clusters do not have radius - suppress warnings
         clusters.push_back(c);
     }
-    for (int i = 0; i < balls.size(); ++i) {
+    for (int i = 0; i < (int)balls.size(); ++i) {
         Ball ball = balls[i];
-        for (int j = 0; j < ball.vertices.size(); ++j) {
-            BallElement ballVertex = ball.vertices[i];
+        for (int j = 0; j < (int)ball.vertices.size(); ++j) {
+            BallElement ballVertex = ball.vertices[j];
             BallElement clusterVertex;
             clusterVertex.dist = ballVertex.dist;
             clusterVertex.vertex = ball.x;

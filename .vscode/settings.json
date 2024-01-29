@@ -21,7 +21,11 @@
         "iostream": "cpp",
         "*.tcc": "cpp",
         "string": "cpp",
-        "unordered_set": "cpp"
+        "unordered_set": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp",
+        "iomanip": "cpp",
+        "functional": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cSpell.language": "en,pl",
@@ -35,7 +39,9 @@
         "Gawrychowski",
         "iithesis",
         "Mikkel",
+        "Prepro",
         "preprocesses",
+        "pthash",
         "SSSP",
         "subquadratic",
         "superlinear",
