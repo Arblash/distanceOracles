@@ -25,7 +25,7 @@ The $(3,0)$ distance oracle is the most precise oracle that have $\beta=0$ and t
 By using the additive error $-$~$\beta>0$ we are able to decrease $\alpha$ to $2$ preserving the $O(n^{2-\epsilon})$ memory $-$ $(2,1)$ distance oracle takes only $O(n^{5/3})$ memory.
 Unfortunately the Oracle with additive error no longer works on weighted graphs, only on unweighted.
 In this paper we will compare $(2,1)$ distance oracles on different graph sets, looking at their memory use, query time and average error.
-We will also compare the preprocessing memory and time.
+We will also compare the preprocessing time.
 }
 \polishabstract {
     Niech $G~=~(V,~E)$ będzie nieskierowanym, nieważonym grafem, gdzie $n~=~|V|$ jest liczbą wierzchołków, a $m~=~|E|$ liczbą krawędzi.
@@ -38,7 +38,7 @@ To co jest w tej strukturze niezwykłe to to, że może ona zajmować znacznie m
 Wyrocznia odległości~$(3,0)$ jest najdokładniejszą wyrocznią, która ma $\beta=0$ i dodatkowo zajmuje tylko $O(n^{2-\epsilon})$ pamięci $-$ dokładniej $O(n^{3/2})$.
 Jednak używając błędu addytywnego $-$~$\beta>0$ jesteśmy w stanie zmniejszyć $\alpha$ do $2$ zachowując pamięć $O(n^{2-\epsilon})$ $-$ wyrocznia odległości~$(2,1)$ zajmuje jedynie $O(n^{5/3})$ pamięci.
 Niestety wyrocznia z błędem addytywnym nie działa na grafy ważone, jedynie na nieważone.
-W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odległości (2,1) pod względem ich zajmowanej pamięci, szybkości działania i średniego błędu. Porównamy również czas i pamięć jaką zajmuje stworzenie wyroczni.
+W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odległości (2,1) pod względem ich zajmowanej pamięci, szybkości działania i średniego błędu. Porównamy również czas jaki zajmuje stworzenie wyroczni.
 
 }
 
@@ -80,6 +80,7 @@ W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odle
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{multirow}
 \usepackage{graphicx, subcaption}
 \graphicspath{ {./images/} }
 
@@ -316,7 +317,7 @@ can be retrieved in $O(k)$ time.
 
 \begin{definition}
     A ball $B_X(v)$ for a given set $X \subseteq V$ and a vertex $v\in V$
-    is a set of vertices $\{u \in V ~|~ \delta(v,u) < \delta(v, X)\}$
+    is a set of vertices $\{u \in V ~|~ \delta(v,u) < \delta(v, X)\}$. We call $\delta(v, X)$ a radius of ball $B_X(v)$
 \end{definition}
 
 \begin{definition}
@@ -374,7 +375,7 @@ sequence of sets.
 
     for $i \leftarrow 1$ to $k-1$
 
-        ~~~~let $A_i$ be a uniform sample from $A_{i-1}$ of size $\ceil[\big]{n^{-1/k} * |A_{i-1}|}$
+        ~~~~let $A_i$ be an uniform sample from $A_{i-1}$ of size $\ceil[\big]{n^{-1/k} * |A_{i-1}|}$
 
     for every $v \in V$
 
@@ -461,7 +462,7 @@ they can be computed deterministically is $O(s $ log $ s $ log $ n)$ time.\cite{
 The total size of the data structure is $O(kn + \sum_{v \in V}|$bun$(v)|)$
 
 \begin{lemma} \label{ballSize}
-    Let $X \subseteq V$, $S$ be a uniform sample from $X$ of size $\ceil[\big]{p * |X|}$.
+    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $\ceil[\big]{p * |X|}$.
     Then for $v \in V$ the expected size of $B_{S}(v) \cap X$ is less than $1/p$.
 \end{lemma}
 
@@ -479,6 +480,30 @@ The total size of the data structure is $O(kn + \sum_{v \in V}|$bun$(v)|)$
     $$\mathbf{E}[B_{S}(v) \cap X] = \sum_{j=1}^{l} \text{Pr}[w_j \in B_{S}(v)] \leq \sum_{j=1}^{l}(1-p)^j < p^{-1}$$
 \end{proof}
 
+\begin{theorem} \label{ballSizeStrong}
+    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $q*\ceil[\big]{p * |X|}$, where $q$ is an positive integer.
+    Then for $v \in V$ the expected value of $|B_{S}(v) \cap X|^q$ is less than $1/p^q$.
+\end{theorem}
+
+\begin{proof}
+    By Lemma \ref{ballSize} we can take $q$ uniform samples $S_1, S_2, \ldots, S_q$ of size $\ceil[\big]{p * |X|}$,
+    and the expected value of $|B_{S_i}(v) \cap X|$, for $v \in V$, $0 < i \leq q$ will be less than $1/p$.
+    However for a given $v \in V$ the order $w_1, w_2, \ldots, w_l$ could be constant for all samples $S_i$,
+    which means that it is independent from the samples. Additionally the samples are independent from each other,
+    so the expected values of the upper bounds on $|B_{S_i}(v) \cap X|$ are independent, which gives:
+
+    $$\mathbf{E}[|B_{S}(v) \cap X|^q] \leq \mathbf{E}[|B_{(\cup_{i = 1}^{q} S_i)}(v) \cap X|^q] \leq \mathbf{E}[\Pi_{i = 1}^{q} |B_{S_i}(v) \cap X|] < 1/p^q$$
+
+    We can think of $B_{\cup_{i = 1}^{q} S_i}(v)$ as an uniform sample $S'$ from $X$ of size $\leq q*\ceil[\big]{p * |X|}$.
+    We can then select uniformly elements one by one that are not yet in the sample and add them to sample until we got a sample of size $|S|$.
+    The sample constructed that way will be uniform, and in each step $B_{S'}(v) \cap X$ will not get any new elements.
+\end{proof}
+
+Theorem \ref{ballSizeStrong} shows that balls $B_S(v)$, $v \in V$, $S$ uniform sample from $V$ of size $\ceil(p*n)$ are unlikely to grow much bigger then $1/p$.\newline
+Note that this does not applies to clusters $C_S(v)$, which in turn are unlikely to intersect with each other much more times than $4n/p^2$,
+as every cluster intersection means that both vertices that have their clusters intersecting belong to the same ball.
+We have $n$ balls with expected square of their size (amount of different pairs of vertices in them) being lower than $\sim 1/(p/2)^2$ ($=$ if $p * n$ is even)
+
 \begin{theorem}
     expected size of bun$(v)$, $v \in V$ is at most $kn^{1/k} + k$
 \end{theorem}
@@ -489,7 +514,7 @@ The total size of the data structure is $O(kn + \sum_{v \in V}|$bun$(v)|)$
     so $|A_{k-1} \setminus A_k| = |A_{k-1}| = (n^{-1/k})^0 * |A_{k-1}| \leq (n^{-1/k})^{k-1} * |A_{0}| + k - 1 = n^{1/k} + k - 1$
     
     For $0 \leq i < k-1$ we show that expected size of bun$(v) \cap A_i$ for $0 \leq i < k-1$ is by Lemma \ref{ballSize}
-    at most $n^{1/k}$. Indeed, $A_{i+1}$ is a uniform sample from $A_i$ of size $\ceil[\big]{p * |A_i|}$ for $p = n^{-1/k}$.
+    at most $n^{1/k}$. Indeed, $A_{i+1}$ is an uniform sample from $A_i$ of size $\ceil[\big]{p * |A_i|}$ for $p = n^{-1/k}$.
     Since no element of $B_{A_j}(v)$ is in $A_i$ for $0 \leq j \leq i$ and
     no element of $A_{j}$ is in $B_{A_{i+1}}(v)$ for $i+1 \leq j \leq k-1$, sets $B_{A_{i+1}}(v) \cap A_i$ for $0 \leq i \leq k-1$ are disjoint, so
     bun$(v) \cap A_i = B_{A_{i+1}}(v) \cap A_i \leq 1/p = n^{1/k}$.
@@ -666,7 +691,7 @@ This however can not be verified by this Oracle.
 
     while $X' \neq \emptyset$
 
-    ~~~~Let $S$ be a uniform sample from $X'$ of size $\ceil[\big]{p * |X|}$ or $X'$ if $\ceil[\big]{p * |X|} < |X'|$
+    ~~~~Let $S$ be an uniform sample from $X'$ of size $\ceil[\big]{p * |X|}$ or $X'$ if $\ceil[\big]{p * |X|} > |X'|$
 
     ~~~~$R \leftarrow R \cup S$
 
@@ -686,7 +711,7 @@ The algorithm $\mathbf{sample}(X, p)$ ensures that all $C_R(v)$ clusters have at
 This ensures that $\mathcal{O}$ have at most $16n/p^2$ defined values.
 \end{remark}
 
-\begin{lemma}
+\begin{lemma} \label{algSampleLogSteps}
     In each step of sample $\mathbf{sample}(X, p)$, the $|X'|$ is at least halved with probability at least $1/2$.
 \end{lemma}
 
@@ -858,17 +883,17 @@ As Oracle uses only data structures that were generated during preprocessing the
 
 \chapter{Theoretical Comparison of (2,1) Distance Oracles} \label{21TheoreticalComparison}
 
-\section{Oracle by Mihai Patrascu and Liam Roditty}
+\section{Oracle by Mihai Patrascu and Liam Roditty} \label{21OraclePatRod}
 
 We present the slightly modified $(2,1)-approximate$ distance oracle of Mihai Patrascu and Liam Roditty \cite{21OracleLessMemory}
 
 \noindent\fbox{
     \begin{minipage}{\textwidth -14.1pt}
-    algorithm $\mathbf{preproPatRo}(G)$
+    algorithm $\mathbf{preproPatRod}(G)$
 
-    let $R$ be a uniform sample from $V$ of size $\ceil[\big]{n^{-1/3} * n}$ 
+    let $R$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-1/3} * n}$ 
     
-    let $S$ be a uniform sample from $V$ of size $\ceil[\big]{n^{-2/3} * n}$
+    let $S$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-2/3} * n}$
 
     let $A_1 \leftarrow R \cup \bigcup_{u \in S} B_R(u)$
 
@@ -897,10 +922,10 @@ The only difference between this Oracle and Oracle from chapter \ref{21DistanceO
 constructs $A_1$ by adding $B_R(u)$, $u \in S$ to the set $R$, instead of adding \~log $n$ sets of size $R$ to the set $R$, which reduces the memory complexity by log $n$.
 However we get a weaker bound on $C_{A_1}(v)$, $v \in V$ resulting in increased preprocessing time for sparse graphs.
 
-\begin{lemma} \label{patRoBallIntersections}
+\begin{lemma} \label{patRodBallIntersections}
     There is at most $O(n^{5/3})$ expected pairs of vertices $(u, v) \in V \times V$
     such that $B_{A_1}(u) \cap B_{A_1}(v) \neq \emptyset$,
-    if $A_1$ was constructed by $\mathbf{preproPatRo}(G)$.
+    if $A_1$ was constructed by $\mathbf{preproPatRod}(G)$.
 \end{lemma}
 
 \begin{proof}
@@ -961,7 +986,7 @@ The calculation of $\delta(u,v)$, $p_{A_1}(v)$ for every $u \in A_1$, $v \in V$ 
 This is an improvement by the factor of log $n$.
 
 The expected value of $\sum_{v \in V}|C_{A_1}(v)|^2$ is $n^2$, so the computation of $\mathcal{O}$ takes $O(n^2)$ expected time.
-The expected auxiliary memory remains at $O(n^{5/3})$ thanks to Lemma \ref{patRoBallIntersections}.
+The expected auxiliary memory remains at $O(n^{5/3})$ thanks to Lemma \ref{patRodBallIntersections}.
 
 The total expected time is $O(n^{2} + mn^{2/3})$, expected auxiliary memory $O(n^{5/3})$.
 
@@ -978,13 +1003,334 @@ The are also more efficient algorithms for the special classes of graphs $-$ spa
 
 \chapter{Results} \label{21PracticalComparison}
 
+\section{Perfect Hashing Functions Generation}
+
+\begin{definition}
+    A minimal perfect hash function is a function that given a set of keys $S$ maps them bijectively to into the set $\{1,2,\ldots,|S|\}$.
+\end{definition}
+
+In the following we will call minimal perfect hash functions simply a perfect hash functions.
+
 The hash table used in the programs is PTHash \cite{hashTablePractical}, minimal perfect hash algorithm
 The implementation of PTHash is written in C++ and available at
 \newline 
 \url{https://github.com/jermp/pthash}
 
-The construction time of PTHash is superlinear, this will not affect the time complexity as all algorithm use $\Omega(n^2)$ preprocessing time,
+The construction time of PTHash is superlinear, fortunately this will not affect the time complexity as all algorithm use $\Omega(n^2)$ preprocessing time,
 but only $O(n^{5/3})$ write operations. However, the practical construction time should improve as PTHash is very efficient.
+
+\section{Programs Compared}
+
+The first program marked as $\mathbf{BFS}$ compared is an Oracle with $A_1 = V$, 
+every exact distance is calculated by $BFS$ algorithm and stored in memory.
+This is our control sample.
+
+The second program $\mathbf{Basic}$ is an Oracle with $A_1$ being an uniform sample from $V$ of size $\ceil[\big](p*|V|) = \ceil[\big](n^{2/3})$.
+Its the most basic $(2,1)$ Distance Oracle without any expansion of the $A_1$ that would ensure small number of ball intersections.
+This Oracle have expected memory of $\Omega(n^{7/3})$ for some graphs.
+
+The third program $\mathbf{BasGoySen}$ is Chapter \ref{21DistanceOracle}. Sample $A_1$ is expanded by vertices with big clusters until none remains.
+
+The fourth and the last program $\mathbf{PatRod}$ is Chapter \ref{21TheoreticalComparison} section \ref{21OraclePatRod} Oracle. Sample $A_1$ is expanded by random balls.
+
+As the programs are very similar, we run the same tests with the same seed for all random sampling (different tests have different seeds).
+This ensures that the first sample will be the same for all programs, removing some noise from our comparison.
+However we have made no attempt to modify the PTHash code, so the perfect hash functions generated are different with each run.
+
+
+
+\section{Random Graphs Comparison}
+
+The Oracles were tested on random graphs with $n = 2000 \pm 100$ in order to avoid any distortions from dense graphs with particular number of edges.
+The number of edges was randomly chosen from $n^a(n - 1)/10$ to $n^a(n-1)/2$ for a parameter $0 \leq a \leq 1$.
+Edges themselves were an uniform sample from all possible edges (no loops and multiple edges).
+
+The following quantities were measured:
+\begin{itemize}
+    \item Preprocessing Time $-$ Time taken (in seconds) from the moment after input was loaded into memory to the moment oracle is ready to answer queries.
+    \item Average Query Time $-$ Time taken (in seconds) to report $\hat{\delta}(u, v)$, for every $u, v \in V$ divided by $|V|^2$.
+    \item Size of the Set $A_1$ $-$ self explanatory.
+    \item $n*|A_1|$ $-$ Memory needed (in machine words) to store $\delta(u, v)$, for every $u \in A_1$, $v \in V$.
+    \item Sum of Ball sizes $-$ $\sum_{v \in V} |B_{A_1}(v)| = \sum_{v \in V} |C_{A_1}(v)|$ $-$ Memory needed (in machine words) to store $\delta(v, u)$, for every $v \in V$, $u \in B_{A_1}(v)$.
+    \item Space PHFs $B_{A_1}$ $-$ Memory needed (in bits) to store the perfect hash function for every $B_{A_1}(v)$, $v \in V$ that allows to access any ball element in constant time, while not using additional memory. 
+            The hash function generator seems to struggle with low key numbers, hence large number of bits for empty balls. This could be fixed by combining all functions into one, if needed.
+    \item Space PHFs $\mathcal{O}$  $-$ Memory needed (in bits) to store the perfect hash function for table $\mathcal{O}$.
+    \item Average Relative Error $-$ Arithmetic average of errors calculated\newline 
+            as $(\hat{\delta(u,v)} - \delta(u,v)) / \delta(u,v)$.
+            If $\delta(u,v) = 0$ or there is no path between $u$ and $v$, all oracles recognize it flawlessly and hence the error is $0$.
+    \item Worst Error percentage $-$ The number of times the reported distance was $2*\delta(u, v) + 1$ divided by number of all distances reported.
+\end{itemize}
+
+\begin{table}[H] \label{test:random.a10}
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 42.2736    & 3.4243     & 3.4170      & 3.6729     \\
+        \hline
+        Avg. Query Time                 & 1.3815e-07 & 1.4916e-07 & 1.5012e-07  & 1.5001e-07 \\
+        \hline
+        $|A_1|$                         & 1993.3     & 158.9      & 158.9       & 171.1      \\
+        \hline
+        $n * |A_1|$                     & 3.9756e+06 & 316860     & 316860      & 341175     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 1834.4     & 1834.4      & 1822.2     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 1834.4     & 1834.4      & 1822.2     \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.4035e+06 & 6.4041e+06 & 6.4043e+06  & 6.4041e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3216       & 13638.4    & 13644.8     & 13558.4    \\
+        \hline
+        Average Error                   & 0          & 0.6674     & 0.6674      & 0.6584     \\
+        \hline
+        Worst Error (\%)                & 0          & 10.4053    & 10.4053     & 10.2423    \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 1.0$, Random Graph, arithmetic average of $10$ tests}
+\end{table}
+
+\begin{table}[H] \label{test:random.a0.75}
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 6.2580     & 0.5368     & 0.5411      & 0.5764     \\
+        \hline
+        Avg. Query Time                 & 1.3829e-07 & 1.5242e-07 & 1.5335e-07  & 1.5128e-07 \\
+        \hline
+        $|A_1|$                         & 1998.3     & 159.2      &  159.2      & 171.1      \\
+        \hline
+        $n * |A_1|$                     & 3.9954e+06 & 318240     &  318240     & 342014     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 1892.2     & 1892.2      & 1857.9     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 2010.2     & 2010.2      & 1921.9     \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.4194e+06 & 6.4206e+06 & 6.4207e+06  & 6.4208e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3216       & 13188.8    & 14188.8     & 13902.4    \\
+        \hline
+        Average Error                   & 0          & 0.4681     & 0.4629      & 0.4629     \\
+        \hline
+        Worst Error (\%)                & 0          & 6.1077     & 6.0448      & 6.0448     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0.75$, Random Graph, arithmetic average of $10$ tests}
+\end{table}
+
+\begin{table}[H] \label{test:random.a0.5}
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 0.9339     & 0.1373     & 0.1399      & 0.1399     \\
+        \hline
+        Avg. Query Time                 & 1.3671e-07 & 1.9346e-07 & 1.9343e-07  & 1.7201e-07 \\
+        \hline
+        $|A_1|$                         & 1995.9     & 159        & 159         & 205.1      \\
+        \hline
+        $n * |A_1|$                     & 3.9849e+06 & 317416     & 317416      & 409890     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 6785.7     & 6785.7      & 4650.3     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 32557.1    & 32557.1     & 16005.1    \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.4119e+06 & 6.4399e+06 & 6.4396e+06  & 6.4208e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3196.8     & 131400     & 130677      & 13902.4    \\
+        \hline
+        Average Error                   & 0          & 0.3012     & 0.3012      & 0.2796     \\
+        \hline
+        Worst Error (\%)                & 0          & 0.9458     & 0.9458      & 0.9842     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0.5$, Random Graph, arithmetic average of $10$ tests}
+\end{table}
+
+\begin{table}[H] \label{test:random.a0.25}
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 0.2460     & 0.1500     & 0.1554      & 0.1082     \\
+        \hline
+        Avg. Query Time                 & 1.4172e-07 & 2.6281e-07 & 2.6099e-07  & 1.9993e-07 \\
+        \hline
+        $|A_1|$                         & 1972.2     & 157.8      & 157.8       & 234.7      \\
+        \hline
+        $n * |A_1|$                     & 3.8929e+06 & 311392     & 311392      & 464122     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 12177.8    & 12177.8     & 8636.1     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 122816     & 122816      & 63118.9    \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.3360e+06 & 6.3941e+06 & 6.3942e+06  & 6.3736e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3216       & 301478     & 299878      & 167926     \\
+        \hline
+        Average Error                   & 0          & 0.1751     & 0.1751      & 0.1393     \\
+        \hline
+        Worst Error (\%)                & 0          & 0.2024     & 0.2024      & 0.1562     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0.25$, Random Graph, arithmetic average of $10$ tests}
+\end{table}
+
+\begin{table}[H] \label{test:random.a0}
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 0.0428     & 0.0464     & 0.0484      & 0.0471     \\
+        \hline
+        Avg. Query Time                 & 1.1239e-07 & 1.2350e-07 & 1.2445e-07  & 1.2298e-07 \\
+        \hline
+        $|A_1|$                         & 2008.9     & 159.7      & 159.7       & 181.5      \\
+        \hline
+        $n * |A_1|$                     & 4.0401e+06 & 321056     & 321056      & 464122     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3521.7     & 3521.7      & 8636.1     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 14910.9    & 14910.9     & 63118.9    \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.4539e+06 & 6.4597e+06 & 6.4604e+06  & 6.3736e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3216       & 24480      & 24467.2     & 167926     \\
+        \hline
+        Average Error                   & 0          & 7.1658e-05 & 0.1751      & 0.1393     \\
+        \hline
+        Worst Error (\%)                & 0          & 7.4778e-07 & 0.2024      & 0.1562     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0$, Random Graph, arithmetic average of $10$ tests}
+\end{table}
+
+
+\section{Star Like Graphs}
+
+It rarely happens that some clusters become sizeable on random graphs.
+This causes $\mathbf{Basic}$ and $\mathbf{BaGoSe}$ to have almost always identical set $A_1$.
+
+Consider a vertex $u$ that has a large cluster $C_{A_1}(u)$ $-$ a cluster of size greater than $q/p$, for a large enough constant $q$.
+$u$ is contained in a lot of balls, however balls are unlikely to be large as stated by Theorem \ref{ballSizeStrong},
+so radius of ball $u$ is smaller than most of the radii of balls from $C_{A_1}(u)$. Balls from the $C_{A_1}$ despite their usually larger radii,
+rarely contain each other as their size is unlikely to be large. This hints that graph around $u$ should be more dense than around most of vertices from its cluster.
+
+In order to generate graphs where large clusters are likely, we decided to split the vertices into two sets $-$ the dense core and sparse corona.
+To simplify analysis the graph will be bipartite with edges only occurring between core and corona,
+and the core will have size $1/p$, so the sample $S$ of size $p * n$ will have reasonable chance of missing the core,
+resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ if our star graph have a lot of edges.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 0.2417     & 2.0036     & 0.0570      & 0.0618     \\
+        \hline
+        Avg. Query Time                 & 1.3576e-07 & 4.7731e-07 & 1.4782e-07  & 1.5623e-07 \\
+        \hline
+        $|A_1|$                         & 1995.8     & 159.05     & 171.3       & 181.45      \\
+        \hline
+        $n * |A_1|$                     & 3.9855e+06 & 317550     & 342000      & 362224     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 5542.25    & 1824.5      & 1914.5     \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 1.2664e+06 & 1824.5      & 8401.6     \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.4116e+06 & 6.4123e+06 & 6.4121e+06  & 6.4122e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3212.8     & 4.2605e+06 & 13580.8     & 46821.6     \\
+        \hline
+        Average Error                   & 0          & 0.1530     & 0.1196      & 0.1270     \\
+        \hline
+        Worst Error (\%)                & 0          & 0.0354     & 0           & 0.0205     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0.3$, Star Like, arithmetic average of $20$ tests}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
+        \hline
+        & $\mathbf{BFS}$ & $\mathbf{Basic}$ & $\mathbf{BaGoSe}$ & $\mathbf{PatRod}$ \\
+        \hline
+        \hline
+        Preprocess Time                 & 0.0972     & 0.3266     & 0.0440      & 0.0622     \\
+        \hline
+        Avg. Query Time                 & 1.2391e-07 & 3.0933e-07 & 1.2971e-07  & 1.6602e-07 \\
+        \hline
+        $|A_1|$                         & 1984.05    & 158.4      & 170.1       & 177.2      \\
+        \hline
+        $n * |A_1|$                     & 3.9389e+06 & 314404     & 337636      & 351724     \\
+        \hline
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3316.45    & 1836        & 2154.65    \\
+        \hline
+        $|\mathcal{O}|$                 & 0          & 215708     & 2685.1      & 25307.5    \\
+        \hline
+        Space PHFs $B_{A_1}$            & 6.3737e+06 & 6.3744e+06 & 6.3743e+06  & 6.3746e+06 \\
+        \hline
+        Space PHFs $\mathcal{O}$        & 3216       & 1.0054e+06 & 18024.8     & 131357     \\
+        \hline
+        Average Error                   & 0          & 0.0960     & 0.0095      & 0.0258     \\
+        \hline
+        Worst Error (\%)                & 0          & 3.1012e-05 & 2.1535e-06  & 0.0128     \\
+        \hline
+        Total Space                     &            &            &             &            \\
+        \hline
+
+    \end{tabular}
+    \caption{$n = 2000 \pm 100$, $a = 0.15$, Star Like, arithmetic average of $10$ tests}
+\end{table}
+
+\section{Open Problems}
+
+    Does algorithm $\mathbf{sample}(X, p)$ from chapter \ref{21DistanceOracle} have $O(1)$ expected number of while loop iterations,
+    if the graph is unweighted?
+
+    It is argued by Lemma \ref{algSampleLogSteps} that in each step balls contributing to the large clusters are likely to be shrunk,
+    when one of the vertices with large cluster will be added to the sample, halving the balls contribution on average.
+    However for unweighted graphs the radius of the contributing ball would be shrunk by $1$, which might drastically reduce the ball size.
+    Intuitively, increasing the radii of every ball by $1$ transforms the $(2,1)$ distance oracle into $(2,0)$ distance oracle
+    increasing the memory consumption to $\Omega(n^2 / poly $ log $ n)$ on some graphs. Decreasing the radii of ball could have opposite effects,
+    as most of the vertices of a ball is usually located at the border of it.
+
+
+
+
 
 %%%%% BIBLIOGRAFIA
 
