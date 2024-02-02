@@ -78,6 +78,7 @@ W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odle
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{multirow}
@@ -99,6 +100,12 @@ $(2,1)$ distance oracle, sacrificing weighted graphs and some memory in the proc
 The next two chapters will be dedicated to the different variations of the $(2,1)$ distance oracle,
 in the chapter \ref{21TheoreticalComparison} we will discuss the theoretical differences,
 while in the chapter \ref{21PracticalComparison} we will show the results of the tests on different graph sets.
+
+The main contribution of this paper is modifying the oracles \cite{a0OraclesBasic} \cite{21OracleBasic} \cite{21OracleLessMemory} in a way that they are all more similar to each other,
+expanding proofs, verifying claims and improving the bounds of a few steps basing on claims from future papers.
+We also show how to adapt $(2,1)$ distance oracle to weighted graphs $(2,\text{max\_edge\_weight})$ distance oracle as claimed possible by \cite{21OracleSpannerNoPenalty}.
+Finally the oracles were implemented for unweighted graphs and tested on random graphs with a particular density. We also constructed unweighted graph realizing log factors from algorithm $\mathbf{center}(G, s)$ of \cite{samplingTechnique},
+making the bounds of \cite{21OracleBasic} tight for that particular oracle construction.
 
 \begin{definition}
     Surplus $t$ estimate for $t>0$ is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq \psi + t$
@@ -163,12 +170,12 @@ The $(\alpha,\beta)-approximate$ distance oracle or in short $(\alpha,\beta)$ di
     $$|nei_{i}(v)| = \sum_{u \in nei_{i-1}(v)} (deg(u)-1)$$
     as
     \newline
-    1. Clearly every vertex $u$ from set $nei_{i-1}(v)$ have exactly one edge $(u, l)$
+    1. Every vertex $u$ from set $nei_{i-1}(v)$ have exactly one edge $(u, l)$
     such that $\delta(v, l)\leq i-1$
     \newline
     and 
     \newline
-    2. Clearly there is no two distinct edges $(u, l),~(w, l)$ satisfying $u,w \in nei_{i-1}(v),$ $l\in~V$ 
+    2. There is no two distinct edges $(u, l),~(w, l)$ satisfying $u,w \in nei_{i-1}(v),$ $l\in~V$ 
 
 
     \begin{figure}[h]
@@ -858,7 +865,7 @@ The expected auxiliary memory is $O(n|A_1|) = O(n^2p$ log$ n)$.
 
 Next we will compute balls and clusters using Lemma \ref{ballClusterComputation} in $O(m/p + n/p $ log $ n)$ expected time and $O(n/p)$ deterministic auxiliary memory.
 
-And at the end we will compute $\mathcal{O}$ at constant time per entry $-$ $O(n/p^2)$ time and memory as cluster size is bounded by $4/p$ (Observation \ref{clusterSize}).
+And at the end we will compute $\mathcal{O}$ in $O(n/p^2)$ memory as cluster size is bounded by $4/p$ (Observation \ref{clusterSize}).
 The time could be either expected $O(n/p^2)$ or deterministic $O(n/p^2 $ log $ n)$ depending on hash table construction method used.
 
 This will total to $O(m $ log $ n + n^2/p $ log $ n + mnp$ log $ n + m/p + n/p $ log $ n + n/p^2) = O(n^2/p $ log $ n + mnp$ log $ n + n/p^2)$ expected time for weighted graphs
@@ -881,7 +888,7 @@ As Oracle uses only data structures that were generated during preprocessing the
 
 
 
-\chapter{Theoretical Comparison of (2,1) Distance Oracles} \label{21TheoreticalComparison}
+\chapter{Removing the Log Factors} \label{21TheoreticalComparison}
 
 \section{Oracle by Mihai Patrascu and Liam Roditty} \label{21OraclePatRod}
 
@@ -920,7 +927,7 @@ We present the slightly modified $(2,1)-approximate$ distance oracle of Mihai Pa
 
 The only difference between this Oracle and Oracle from chapter \ref{21DistanceOracle} is that this oracle
 constructs $A_1$ by adding $B_R(u)$, $u \in S$ to the set $R$, instead of adding \~log $n$ sets of size $R$ to the set $R$, which reduces the memory complexity by log $n$.
-However we get a weaker bound on $C_{A_1}(v)$, $v \in V$ resulting in increased preprocessing time for sparse graphs.
+Here we get a weaker bound on $C_{A_1}(v)$, $v \in V$, which fortunately is claimed to not increase preprocessing time for sparse graphs too much \cite{21OracleSpannerNoPenaltyNoLog}.
 
 \begin{lemma} \label{patRodBallIntersections}
     There is at most $O(n^{5/3})$ expected pairs of vertices $(u, v) \in V \times V$
@@ -988,13 +995,14 @@ This is an improvement by the factor of log $n$.
 The expected value of $\sum_{v \in V}|C_{A_1}(v)|^2$ is $n^2$, so the computation of $\mathcal{O}$ takes $O(n^2)$ expected time.
 The expected auxiliary memory remains at $O(n^{5/3})$ thanks to Lemma \ref{patRodBallIntersections}.
 
-The total expected time is $O(n^{2} + mn^{2/3})$, expected auxiliary memory $O(n^{5/3})$.
+The total expected time is $O(n^{2} + mn^{2/3})$ (or $O(mn^{2/3})$ by claim from \cite{21OracleSpannerNoPenaltyNoLog}), expected auxiliary memory $O(n^{5/3})$.
 
 \section{Further Improvements}
 
-The Oracle preprocessing time could be further improved by applying spanners $-$ subgraphs of a graph that have less edges than original
+The Oracle preprocessing time could be further improved to $O(n^2)$ by applying spanners $-$ subgraphs of a graph that have less edges than original
 but the distances between nodes are preserved up to some error (usually additive or multiplicative).
 This however comes with the drawbacks as either the distance approximation is worse $-$ stretch $(2,3)$ \cite{21OracleBasic} or the oracle becomes more complicated \cite{21OracleSpannerNoPenalty} \cite{21OracleSpannerNoPenaltyNoLog}
+However using spanners will only improve the preprocessing time for graphs with $\omega(n^{4/3})$ edges, as currently known construction of good enough spanner takes $\Theta(n^2)$ time.
 
 The Oracle can be generalized similar to Oracle from Chapter \ref{30DistanceOracle} to produce $(2k - 2, 1)-approximate$ distance oracle of size $O(n^{1 + 2/(2k-1)})$ \cite{a1Oracle}
 
@@ -1041,7 +1049,7 @@ However we have made no attempt to modify the PTHash code, so the perfect hash f
 
 \section{Random Graphs Comparison}
 
-The Oracles were tested on random graphs with $n = 2000 \pm 100$ in order to avoid any distortions from dense graphs with particular number of edges.
+The Oracles were tested on random graphs with $n = 2000 \pm 100$ in order to avoid any distortions from dense graphs with particular number of vertices, such as program behaving differently on semi-clique graphs with even or odd number of vertices.
 The number of edges was randomly chosen from $n^a(n - 1)/10$ to $n^a(n-1)/2$ for a parameter $0 \leq a \leq 1$.
 Edges themselves were an uniform sample from all possible edges (no loops and multiple edges).
 
@@ -1095,6 +1103,11 @@ The following quantities were measured:
     \caption{$n = 2000 \pm 100$, $a = 1.0$, Random Graph, arithmetic average of $10$ tests}
 \end{table}
 
+The very dense random graphs $-$ $a=1.0$ with at least $1/5$ of all possible edges have all or almost all balls and clusters of size $\leq 1$.
+The preprocessing time is the largest here especially for the naive $\mathbf{BFS}$ approach.
+The oracle reports the approximate with over $10\%$ of answers being reported with bigger stretch than $2$. The average reported distance is $\sim 66 \%$ greater than real distance.
+The errors are surprisingly large considering that most if not all distances are not larger than $2$.
+
 \begin{table}[H] \label{test:random.a0.75}
     \centering
     \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
@@ -1128,6 +1141,10 @@ The following quantities were measured:
     \end{tabular}
     \caption{$n = 2000 \pm 100$, $a = 0.75$, Random Graph, arithmetic average of $10$ tests}
 \end{table}
+
+The slightly less dense random graphs $-$ $a=0.75$ have some of the balls intersecting, much better preprocessing time by about the same factor $6.7$ for all programs.
+And smaller errors both average and percent of worst case by about factor of $2/3$.
+
 
 \begin{table}[H] \label{test:random.a0.5}
     \centering
@@ -1163,6 +1180,10 @@ The following quantities were measured:
     \caption{$n = 2000 \pm 100$, $a = 0.5$, Random Graph, arithmetic average of $10$ tests}
 \end{table}
 
+For random graphs with about $n^{3/2}$ edges $-$ $a = 0.5$ the $\mathbf{BFS}$ speeds up again by a factor $\sim 6.7$, however other programs
+speed up about $4$ times as the balls here starts to intersect in bigger numbers.
+As balls grow in size the Worst Error Percentage drops rapidly, while the average error drops again by factor $\sim 2/3$
+
 \begin{table}[H] \label{test:random.a0.25}
     \centering
     \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
@@ -1197,6 +1218,11 @@ The following quantities were measured:
     \caption{$n = 2000 \pm 100$, $a = 0.25$, Random Graph, arithmetic average of $10$ tests}
 \end{table}
 
+For $a = 0.25$ the random graphs have a lot of balls intersecting, which causes the $\mathbf{Basic}$ and $\mathbf{BaGoSe}$
+to work slower despite the better theoretical complexity for $\mathbf{BaGoSe}$.
+Here the $\mathbf{PatRod}$ is faster then the rest of algorithms, despite being similar on other tests.
+The Average Error drops as usual.
+
 \begin{table}[H] \label{test:random.a0}
     \centering
     \begin{tabular}{ |p{3cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  } 
@@ -1210,19 +1236,19 @@ The following quantities were measured:
         \hline
         $|A_1|$                         & 2008.9     & 159.7      & 159.7       & 181.5      \\
         \hline
-        $n * |A_1|$                     & 4.0401e+06 & 321056     & 321056      & 464122     \\
+        $n * |A_1|$                     & 4.0401e+06 & 321056     & 321056      & 364936     \\
         \hline
-        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3521.7     & 3521.7      & 8636.1     \\
+        $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3521.7     & 3521.7      & 3432.8     \\
         \hline
-        $|\mathcal{O}|$                 & 0          & 14910.9    & 14910.9     & 63118.9    \\
+        $|\mathcal{O}|$                 & 0          & 14910.9    & 14910.9     & 14202.8    \\
         \hline
         Space PHFs $B_{A_1}$            & 6.4539e+06 & 6.4597e+06 & 6.4604e+06  & 6.3736e+06 \\
         \hline
         Space PHFs $\mathcal{O}$        & 3216       & 24480      & 24467.2     & 167926     \\
         \hline
-        Average Error                   & 0          & 7.1658e-05 & 0.1751      & 0.1393     \\
+        Average Error                   & 0          & 7.1658e-05 & 7.1658e-05  & 6.5491e-05 \\
         \hline
-        Worst Error (\%)                & 0          & 7.4778e-07 & 0.2024      & 0.1562     \\
+        Worst Error (\%)                & 0          & 7.4778e-07 & 7.4778e-07  & 7.4778e-07 \\
         \hline
         Total Space                     &            &            &             &            \\
         \hline
@@ -1230,6 +1256,12 @@ The following quantities were measured:
     \end{tabular}
     \caption{$n = 2000 \pm 100$, $a = 0$, Random Graph, arithmetic average of $10$ tests}
 \end{table}
+
+The last test serries are the tests with $m < n$, so the graph is disconnected which massively improves the preprocessing time and the approximation errors are rather low,
+as all oracles can tell if the path between two vertices exists or not.
+
+
+The Oracles behave rather similarly, however the Oracle $\mathbf{PatRod}$ does seem to work faster on graphs where balls are usually larger.
 
 
 \section{Star Like Graphs}
@@ -1245,7 +1277,7 @@ rarely contain each other as their size is unlikely to be large. This hints that
 In order to generate graphs where large clusters are likely, we decided to split the vertices into two sets $-$ the dense core and sparse corona.
 To simplify analysis the graph will be bipartite with edges only occurring between core and corona,
 and the core will have size $1/p$, so the sample $S$ of size $p * n$ will have reasonable chance of missing the core,
-resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ if our star graph have a lot of edges.
+resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ preprocessing time and $\Omega(n^2)$ memory if our star graph have a lot of edges.
 
 \begin{table}[H]
     \centering
@@ -1316,17 +1348,79 @@ resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ if our star graph have a
     \caption{$n = 2000 \pm 100$, $a = 0.15$, Star Like, arithmetic average of $10$ tests}
 \end{table}
 
-\section{Open Problems}
+On Star Like graphs the $\mathbf{Basic}$ algorithm performs much worse than even simple $\mathbf{BFS}$.
+While the $\mathbf{BaGoSe}$ slightly outperforms the $\mathbf{PatRod}$ as the set of vertices with clusters with size $>1$
+is rather small and those vertices are usually added to the $\mathbf{BaGoSe}$ sample.
 
-    Does algorithm $\mathbf{sample}(X, p)$ from chapter \ref{21DistanceOracle} have $O(1)$ expected number of while loop iterations,
-    if the graph is unweighted?
+\section{Improving the Star Like Graphs Core}
 
-    It is argued by Lemma \ref{algSampleLogSteps} that in each step balls contributing to the large clusters are likely to be shrunk,
-    when one of the vertices with large cluster will be added to the sample, halving the balls contribution on average.
-    However for unweighted graphs the radius of the contributing ball would be shrunk by $1$, which might drastically reduce the ball size.
-    Intuitively, increasing the radii of every ball by $1$ transforms the $(2,1)$ distance oracle into $(2,0)$ distance oracle
-    increasing the memory consumption to $\Omega(n^2 / poly $ log $ n)$ on some graphs. Decreasing the radii of ball could have opposite effects,
-    as most of the vertices of a ball is usually located at the border of it.
+The Star Like graphs from the previous section have one important flaw $-$
+when a vertex from the core is added to the sample most of the balls it is contained in will have radius equal to $1$ and thus size equal to $1$.
+This however can be fixed by slightly modifying the construction.
+
+We present the graph for which $\mathbf{sample}(V, n^{-1/3})$ requires $\Omega($ log $n)$ expected number of steps.
+
+We first split the graph into $n*p/(2q)$ disjoint parts $G_1, G_2, \ldots, G_{n*p/(2q)}$, where $p = n^{-1/3}$ and $q \geq 8$ is a constant.
+Each of the parts is constructed as follows:
+\begin{itemize}
+    \item Let $D_1, D_2, \ldots, D_{p^{-1/3}}$ be the disjoint sets of vertices of size $1/p * p^{1/3}$. We will call them the (dense) core.
+    \item Let $S_1, S_2, \ldots, S_{p^{-1/3}}$ be the disjoint sets of vertices of size $q/p * p^{1/3}$. We will call them the (sparse) corona.
+    \item Now for every $i, j \in \{1, 2, \ldots p^{-1/3}\}$ we will connect all vertices of $D_i$ to $w_1$, all vertices of $S_j$ to $w_{p^{1/3} + i}$ and every vertex $w_k$ to $w_{k+1}$ for $1 \leq k < p^{-1/3} + i$,
+            where $w_1, w_2, \ldots, w_{p^{-1/3} + i}$ is a set of vertices $J_{(i, j)}$ called joint of size at most $2 * p^{-1/3}$.
+\end{itemize}
+All sets $D_i, S_j, J_{(i, j)}$ are disjoint and their combined size totals to at most $(q + 3)/p < 2q/p$.
+
+We now estimate the lower bound on expected number of $\mathbf{sample}(V, p)$ steps.
+For simplicity we will consider only the clusters of core vertices.
+
+For a part to contain no large clusters ($> 4/p$) one of the following conditions must be satisfied:
+\begin{enumerate}
+    \item $\psi_1$ there is a vertex $u$ that is in the sample and belongs to $D_1 \cup_{j=1}^{p^{-1/3}} J_{(1, j)}$.
+    \item $\psi_2$ there is less than $4/q * p^{-1/3}$ sets $S_j \cup_{i=1}^{p^{-1/3}} J_{(i, j)}$ that do not have any of the vertices in the sample.
+\end{enumerate}
+if neither of the above holds then all vertices from sets $S_j$ from the $\psi_2$ condition contain $D_1$ resulting in clusters from $D_1$ being $\geq 4/p + p^{-1/3} + 1$.
+
+What is the expected number $\mathbf{E}[t]$ of vertices from a given $G_k$, $1 \leq k \leq n*p/(2q)$ that will get added to the sample?
+For the $\psi_1$ to occur the set of size $3/p^{2/3}$ must be hit. However the chance for next sampled vertex to hit this set is less than: (assuming no $\psi_2$ have occurred)
+$$\frac{3/p^{2/3}}{l/p^{2/3}}$$
+where $1 \leq l \leq p^{-1/3}$ is the largest integer such that $\cup_{i=1}^{l} (D_1 \cup_{j=1}^{p^{-1/3}} J_{(1, j)})$ does not contain any sampled vertex.
+For the $\psi_2$ to occur $t$ must be not less than $1/2 * p^{-1/3}$ as $q \geq 8$.
+
+For every $x$ we will estimate the upper bound $\phi(x)$ on the number of core sets $D_1, D_2, \ldots D_{\phi(x)}$ where every vertex is a large cluster, needed for $\mathbf{E}[t]$ to be at least $x$ on condition that $t \leq 2x$.
+If $2x < 1/2 * p^{-1/3}$ then $\psi_2$ does not hold, so we will assume that $\psi_2$ is false.
+
+Note that for the sets $D_1, D_2, \ldots D_{\phi(x)}$ to be large it is sufficient that there is no vertices from $\cup_{i=1}^{\phi(x)}(D_i \cup_{j=1}^{p^{-1/3}} J_{(i, j)})$ in the sample, and $\psi_2$ is false.
+
+The estimate will be calculated by induction
+Suppose that $\phi(x - 0.5) = a$, then $\phi(x) = 4*a$, as adding vertex to the sample have at most $a * 3 / (a * 3 + (4-1)*a) \leq 1/2$ chance of hitting the $D_1, D_2, \ldots, D_a$ or their joints, which results in $\mathbf{E}[t] \geq x - 0.5$ on condition $t \leq 2x - 1$ and
+when those sets were not hit the $\mathbf{E}[t] \geq x - 0.5 + 1$ on condition $t \leq 2x$ as we have at least $a$ core sets with large clusters. This combined gives $\mathbf{E}[t] \geq x$ on condition $t \leq 2x$
+
+The $\phi(1) = 1$ on condition $t \leq 1 < 2$ as we need at least one additional vertex in sample to satisfy $\psi_1$.
+The largest $x$ such that $\phi(x) \leq p^{-1/3}$ is $\floor($log$_{16}~p^{-1/3}) + 1$.
+
+This concludes that expected size of the sample from $\mathbf{sample}(V, p)$ is not less than
+$n*p/(2q) * $log$_2~p^{-1/3}/4 = n*p/q * ($log$_2~ n)/72 = \Omega(n*p * \frac{\text{log}~n}{q})$.
+As in each step the sample from $\mathbf{sample}(V, p)$ grows by $\ceil(p*n)$ we have $\Omega(n*p $log$ n)$ expected steps for small constant $q$ (like $q = 8$).
+
+The $\mathbf{BaGoSe}$ memory and expected preprocessing time log factors therefore are tight $-$ there are graphs where $\mathbf{BaGoSe}$ takes $\Theta(n^{5/3} $ log $n)$ memory and $\Theta(mn^{2/3} $ log $n)$ expected preprocessing time.
+% The above graph have $m = \Theta(n^{10/9})$ edges.
+
+
+\section{Conclusion}
+The both oracles $-$ $\mathbf{BaGoSe}$ and $\mathbf{PatRod}$ $-$ are fast, achieving even subquadratic expected preprocessing time on sparse graphs.
+The distance approximation errors seems to be low on sparse graphs, as expected due to similar construction of $(2,0)$ distance oracle with $O(n^{4/3}m^{1/3})$ expected memory used \cite{21OracleLessMemory}
+
+The $\mathbf{PatRod}$ seems to perform the best on difficult graphs as expected, however the $\mathbf{Basic}$ outperforms the $\mathbf{PatRod}$ memory wise on most graphs (dense or not).
+As calculating balls and clusters is rather fast $\mathbf{BaGoSe}$ performs about as fast as $\mathbf{Basic}$ and takes the same memory on most graphs, while only increasing the $A_1$ sample when worst case scenario is more likely to happen.
+
+This points to the possibility of combining those programs:
+we take the sample as in $\mathbf{Basic}$, we can calculate the $\sum_{v \in V} |C_{A_1}(v)|^2$ in $O(m + n/p^2)$ expected time for unweighted graphs.
+If this value is too large (say larger than $n/p^2$) then we expand the $A_1$ sample like in $\mathbf{PatRod}$.
+
+This combined program will behave like $\mathbf{PatRod}$ on difficult graphs with negligible preprocessing time increase,
+while behaving $\mathbf{Basic}$ on easier graphs, where $\mathbf{PatRod}$ unlikely to be better especially memory wise.
+
+
 
 
 
@@ -1343,6 +1437,10 @@ graphs. Submitted for publication, 2000.
 P. Erd{\"o}s. Extremal problems in graph theory. In $Theory$ $of$ $Graphs$
 $and$ $its$ $Applications$ $(Proc.$ $Sympos.$ $Smolenice,$ $1963)$, pages 29–36.
 Publ. House Czechoslovak Acad. Sci., Prague, 1964.
+
+\bibitem{samplingTechnique}
+Mikkel Thorup and Uri Zwick. Compact routing schemes. $In$ $13th$ $ACM$ $Symposium$ $on$
+$Parallel$ $Algorithms$ $and$ $Architectures$ $(SPAA)$, pages 1–10, 2001.
 
 \bibitem{a0OraclesBasic} 
 M. Thorup and U. Zwick. Approximate distance oracles. $Journal$ $of$ $Association$ $of$ $Computing$
