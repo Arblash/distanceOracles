@@ -7,13 +7,12 @@
 
 using namespace std;
 
-bool isStarLike = true;
-
 
 int main(int argc, char* argv[]) {
     int n = stoi(argv[1]);
     double a = stod(argv[2]);
     long long seed = stoll(argv[3]);
+    bool isStarLike = stoi(argv[4]);
 
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     ios_base::sync_with_stdio(0);
