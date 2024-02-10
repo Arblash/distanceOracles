@@ -14,31 +14,29 @@
 \polishtitle    {Eksperymentalne porównanie \fmlinebreak wyroczni~odległości~(2,1)}
 \englishabstract{
     Let $G~=~(V,~E)$ be an undirected unweighted graph with $|V|~=~n$ vertices and $|E|~=~m$ edges.
-Let $\delta(u,~v)$ denote the distance between vertices $u,~v~\in~V$.
-An $(\alpha,\beta)-approximate$ distance oracle for $G$ is a data structure that supports the following distance queries between pair of vertices in $G$:
-Given two vertices $u,~v$ it can in constant time compute a distance estimate $\hat{\delta}(u,~v)$ that satisfies 
-$$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
-What is remarkable in this structure is that it can take significantly less than quadratic space,
-but still answer distance queries in constant time,
-despite quadratic space structure required to retrieve exact distances.
-The $(3,0)$ distance oracle is the most precise oracle that have $\beta=0$ and takes only $O(n^{2-\epsilon})$ memory $-$ $O(n^{3/2})$ to be exact.
-By using the additive error $-$~$\beta>0$ we are able to decrease $\alpha$ to $2$ preserving the $O(n^{2-\epsilon})$ memory $-$ $(2,1)$ distance oracle takes only $O(n^{5/3})$ memory.
-Unfortunately the Oracle with additive error no longer works on weighted graphs, only on unweighted.
-In this paper we will compare $(2,1)$ distance oracles on different graph sets, looking at their memory use, query time and average error.
-We will also compare the preprocessing time.
+    Let $\delta(u,~v)$ denote the distance between vertices $u,~v~\in~V$.
+    An $(\alpha,\beta)-approximate$ distance oracle for $G$ is a data structure that supports the following queries between pairs of vertices in $G$:
+    given two vertices $u,~v$ it can in constant time compute a distance estimate $\hat{\delta}(u,~v)$ that satisfies 
+    $$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
+    What is remarkable in this structure is that it can take significantly less than quadratic space,
+    but still answer distance queries in constant time, despite quadratic space structure required to retrieve exact distances.
+    The $(3,0)$ distance oracle is the most precise oracle that have $\beta=0$ and takes subquadratic memory $-$ $O(n^{3/2})$.
+    By using the additive error $-$~$\beta>0$ we are able to decrease $\alpha$ to $2$, while retaining subquadratic memory $-$ $(2,1)$ distance oracle takes only $O(n^{5/3})$ memory.
+    In this paper we will compare $(2,1)$ distance oracles on different graph sets, looking at their memory use, query time and average error.
+    We will also compare the preprocessing time.
 }
 \polishabstract {
     Niech $G~=~(V,~E)$ będzie nieskierowanym, nieważonym grafem, gdzie $n~=~|V|$ jest liczbą wierzchołków, a $m~=~|E|$ liczbą krawędzi.
-Oznaczmy jako $\delta(u,~v)$ odległość pomiędzy wierzchołkami $u,~v~\in~V$.
-Wyrocznią odległości $(\alpha,\beta)$-przybliżoną grafu $G$, gdzie $\alpha~\geq 1,~\beta~\geq~0$ nazwiemy strukturę danych, która umożliwia następujące zapytania o odległości pomiędzy parami wierzchołków $G$:
-Mając wierzchołki $u,~v$ możemy w stałym czasie policzyć przybliżoną odległość $\hat{\delta}(u,~v)$, która spełnia 
-$$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
-To co jest w tej strukturze niezwykłe to to, że może ona zajmować znacznie mniej niż kwadratowo wiele pamięci ale odpowiedzi na zapytania, których wszystkich możliwych jest kwadratowo wiele, pozostają w czasie stałym.
-\newline 
-Wyrocznia odległości~$(3,0)$ jest najdokładniejszą wyrocznią, która ma $\beta=0$ i dodatkowo zajmuje tylko $O(n^{2-\epsilon})$ pamięci $-$ dokładniej $O(n^{3/2})$.
-Jednak używając błędu addytywnego $-$~$\beta>0$ jesteśmy w stanie zmniejszyć $\alpha$ do $2$ zachowując pamięć $O(n^{2-\epsilon})$ $-$ wyrocznia odległości~$(2,1)$ zajmuje jedynie $O(n^{5/3})$ pamięci.
-Niestety wyrocznia z błędem addytywnym nie działa na grafy ważone, jedynie na nieważone.
-W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odległości (2,1) pod względem ich zajmowanej pamięci, szybkości działania i średniego błędu. Porównamy również czas jaki zajmuje stworzenie wyroczni.
+    Oznaczmy jako $\delta(u,~v)$ odległość pomiędzy wierzchołkami $u,~v~\in~V$.
+    $(\alpha,\beta)$-przybliżoną wyrocznią odległości grafu $G$, gdzie $\alpha~\geq 1,~\beta~\geq~0$ nazwiemy strukturę danych, która umożliwia następujące zapytania o odległości pomiędzy parami wierzchołków $G$:
+    Mając wierzchołki $u,~v$ możemy w stałym czasie policzyć przybliżoną odległość $\hat{\delta}(u,~v)$, która spełnia 
+    $$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
+    Ta struktura może zajmować mniej niż kwadratowo wiele pamięci, ale odpowiedzi na zapytania, których wszystkich możliwych jest kwadratowo wiele, pozostają w czasie stałym.
+    \newline 
+    Wyrocznia odległości~$(3,0)$ jest najdokładniejszą wyrocznią, która ma $\beta=0$ i dodatkowo zajmuje tylko $O(n^{2-\epsilon})$ pamięci $-$ dokładniej $O(n^{3/2})$.
+    Jednak używając błędu addytywnego $-$~$\beta>0$ jesteśmy w stanie zmniejszyć $\alpha$ do $2$ zachowując pamięć $O(n^{2-\epsilon})$ $-$ wyrocznia odległości~$(2,1)$ zajmuje jedynie $O(n^{5/3})$ pamięci.
+    W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odległości (2,1) pod względem ich zajmowanej pamięci, szybkości działania i średniego błędu.
+    Porównamy również czas, jaki zajmuje stworzenie wyroczni.
 
 }
 
@@ -69,7 +67,7 @@ W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odle
 
 \usepackage{amsthm, amssymb}
 \theoremstyle{definition} \newtheorem{definition}{Definition}[chapter]
-\theoremstyle{remark} \newtheorem{remark}[definition]{Observation}
+\theoremstyle{plain} \newtheorem{remark}[definition]{Observation}
 \theoremstyle{plain} \newtheorem{theorem}[definition]{Theorem}
 \theoremstyle{plain} \newtheorem{lemma}[definition]{Lemma}
 \renewcommand \qedsymbol {\ensuremath{\square}}
@@ -79,12 +77,20 @@ W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odle
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+% \newcommand{\deg}{\text{deg}}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{multirow}
 \usepackage{graphicx, subcaption}
 \graphicspath{ {./images/} }
+\usepackage{tikz}
+\usepackage{tikz-network}
+\usetikzlibrary{calc, graphs}
+\usepackage{pgfplots}
+\usepackage{amsmath}
 
+
+\DeclareHookRule{begindocument}{iithesis}{after}{cleveref}
 
 \begin{document}
 
@@ -92,39 +98,87 @@ W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odle
 
 \chapter{Introduction}
 
-In chapter \ref{theoreticalLimitations} we will discuss why $(3,0)$ and $(2,1)$ distance oracles
-have minimum possible error allowing for subquadratic space structure.
-Next, in chapter \ref{30DistanceOracle} we will present the basic $(3,0)$ distance oracle by Thorup and Zwick \cite{a0OraclesBasic}
-chapter \ref{21DistanceOracle} will be dedicated to how the $(3,0)$ multiplicative error barrier was breached by adding the additive error $-$
-$(2,1)$ distance oracle, sacrificing weighted graphs and some memory in the process.
-The next two chapters will be dedicated to the different variations of the $(2,1)$ distance oracle,
-in the chapter \ref{21TheoreticalComparison} we will discuss the theoretical differences,
-while in the chapter \ref{21PracticalComparison} we will show the results of the tests on different graph sets.
+Given the (undirected) graph or a network, such as a road network or the internet, the distance queries are one of the most basic problems.
+However calculating the distances online is often too slow for practical use, so we want to preprocess the graph in a way that the distance queries could be answered quickly.
+If we want to answer the distance queries in constant time then we need $\Omega(n^{2 - \epsilon})$ memory as shown in Chapter \ref{theoreticalLimitations},
+which is often more than the memory needed to store the graph itself.
+Fortunately knowing the exact distances is not always necessary, as the data packets could be routed through the short enough paths,
+and for drivers knowing that the gas station or hotel is nearby is often enough. By dropping the requirement that the distances returned are exact,
+we are able to decrease both the memory needed and preprocessing time, while retaining the constant query time.
 
-The main contribution of this paper is modifying the oracles \cite{a0OraclesBasic} \cite{21OracleBasic} \cite{21OracleLessMemory} in a way that they are all more similar to each other,
-expanding proofs, verifying claims and improving the bounds of a few steps basing on claims from future papers.
-We also show how to adapt $(2,1)$ distance oracle to weighted graphs $(2,\text{max\_edge\_weight})$ distance oracle as claimed possible by \cite{21OracleSpannerNoPenalty}.
-Finally the oracles were implemented for unweighted graphs and tested on random graphs with a particular density. We also constructed unweighted graph realizing log factors from algorithm $\mathbf{center}(G, s)$ of \cite{samplingTechnique},
-making the bounds of \cite{21OracleBasic} tight for that particular oracle construction.
+\section{Summary of Related Work on Oracles}
+
+The first distance oracle, the $(2k-1, 0)$ distance oracle was created in $2005$ by Thorup and Zwick \cite{a0OraclesBasic}.
+Their oracle works on weighted graphs, uses $O(kn^{1+1/k})$ memory and is constructed in $O(kmn^{1/k})$ expected time.
+They also provided a routing scheme, distance labels and spanner construction based on their oracle, improving the previous results.
+The oracle construction could be derandomized resulting in $\tilde{O}(knm)$ time and increased memory usage by factor of $\log n$.
+The derandomization was improved shortly after together with Roditty resulting in $\tilde{O}(kmn^{1/k})$ time and no extra memory \cite{a0OraclesMN1KDeterministicTime}.
+For unweighted graphs, the expected preprocessing time was improved in $2006$, achieving $O(n^2)$ expected time by Baswana and Sen \cite{a0OraclesN2Time}.
+
+In $2008$ Baswana, Goyal and Sen have constructed $(2,1)$ distance oracle for unweighted graphs \cite{21OracleBasic}, which by choosing different constants and using a hash table results in
+structure using $O(n^{5/3} \log n)$ memory and constructed in $O(mn^{2/3} \log n)$ expected time.
+They have also proposed using spanners in order to reduce the preprocessing time to expected $\tilde{O}(n^2)$, but increasing $\beta$ in the process.
+
+The first $(2,1)$ distance oracle for unweighted graphs with explicit subquadratic space was constructed in $2010$ by Patrascu and Roditty \cite{21OracleLessMemory}.
+Their oracle uses $O(n^{5/3})$ memory and is constructed in $O(mn^{2/3} + n^{7/3})$ expected time
+\footnote{In $2017$, the Knudsen claims that the expected construction time is actually $O(mn^{2/3})$ based on personal communication with Roditty \cite[Chapter 4, Lemma 10]{21OracleSpannerNoPenaltyNoLog}.}.
+They also provide a modification for their oracle resulting in $(2,0)$ distance oracle for weighted graphs, that uses $O(m^{1/3}n^{4/3})$ memory.
+
+In $2011$ the Baswana, Goyal and Sen $(2,1)$ distance oracle was generalized by Abraham and Gavoille, yielding $(2k-2, 1)$ distance oracle \cite{a1Oracle}.
+This oracle uses $\tilde{O}(n^{1 + 2/(2k-1)})$ memory and is constructed in expected polynomial time.
+They also provided a routing scheme, distance labels based on their oracle, improving the previous results.
+
+With clever use of spanners, the expected construction time of $(2,1)$ distance oracle was reduced to $\tilde{O}(n^2)$, using $O(n^{5/3}\log ^2 n)$ memory by Sommer in $2016$ \cite{21OracleSpannerNoPenalty}.
+Subsequently the expected construction time was reduced to $O(n^2)$, using $O(n^{5/3})$ memory by Knudsen \cite{21OracleSpannerNoPenaltyNoLog}
+
+\section{Overview of the Paper}
+The paper is organized as follows:
+
+In Chapter \ref{theoreticalLimitations} we will discuss why $(3,0)$ and $(2,1)$ distance oracles
+have minimum possible error allowing for subquadratic space structure.
+
+Next, in Chapter \ref{30DistanceOracle} we will present the basic $(3,0)$ distance oracle by Thorup and Zwick \cite{a0OraclesBasic}.
+
+Chapter \ref{21DistanceOracle} will be dedicated to how the $(3,0)$ multiplicative error barrier was breached by adding the additive error $-$
+$(2,1)$ distance oracle, sacrificing weighted graphs and some memory in the process \cite{21OracleBasic}.
+
+The next two Chapters will be dedicated to the different variations of the $(2,1)$ distance oracle,
+in the Chapter \ref{21TheoreticalComparison} we will discuss the theoretical differences,
+while in the Chapter \ref{21PracticalComparison} we will show the results of the tests on different graph sets.
+
+The main contribution of this paper is describing the oracles \cite{a0OraclesBasic, 21OracleBasic, 21OracleLessMemory} in a way that they are all more similar to each other,
+expanding proofs, verifying claims and improving the bounds of a few steps basing on claims from papers.
+We also show how to adapt $(2,1)$ distance oracle to weighted graphs $(2, h)$ distance oracle, where $h$ is the weight of the heaviest edge, as claimed possible by \cite{21OracleSpannerNoPenalty}.
+Finally, the distance oracles were implemented for unweighted graphs and tested on random graphs with a particular density. We also constructed unweighted graphs
+for which expected running time of distance oracle from Chapter \ref{21DistanceOracle} realizes the upper bound. This shows that both the memory bound and expected preprocessing time bound are tight.
+
+\section{Preliminaries}
+We consider only undirected graphs $G = (V, E)$ with $|V| = n$ and $|E| = m$. Some of the ideas require the graph to be unweighted,
+particularly constant surplus oracles in Chapters \ref{21DistanceOracle}, \ref{21TheoreticalComparison}, \ref{21PracticalComparison}.
+
+The $\tilde{O}$, $\tilde{\Omega}$, $\tilde{\Theta}$ are the $O$, $\Omega$, $\Theta$ counterparts, that hide $\log$ factors.
 
 \begin{definition}
-    Surplus $t$ estimate for $t>0$ is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq \psi + t$
+    Surplus$-t$ estimate, for $t>0$, is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq \psi + t$
     It is also called the additive error estimate.
 \end{definition}
 
 \begin{definition}
-    Stretch $t$ estimate for $t>1$ is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq t\psi$.
+    Stretch$-t$ estimate, for $t>1$, is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq t\psi$.
     It is also called the multiplicative error estimate.
 \end{definition}
 
 \begin{definition}
     % It is also called Stretch $(\alpha, \beta)$ estimate
-    $(\alpha, \beta)$-approximation for $\alpha \geq 1, \beta \geq 0$ is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq \alpha\psi + \beta$.
-    $(\alpha, \beta)$-approximation have additive and multiplicative errors combined, when $\alpha > 1, \beta > 0$.
+    $(\alpha, \beta)-$approximation, for $\alpha \geq 1, \beta \geq 0$, is any estimate $\hat{\psi}$ of a value $\psi$ that satisfies $\psi \leq \hat{\psi} \leq \alpha\psi + \beta$.
+    We say that $(\alpha, \beta)-$approximation is both additive and multiplicative error estimate, when $\alpha > 1, \beta > 0$.
 \end{definition}
-    Usually when $\beta > 0$ the graph is assumed to be unweighted or $\beta$ depends on the largest edge.
+    Usually, when $\beta = 0$ the graph is assumed to be weighted, and when $\beta > 0$ the graph is assumed to be weighted or $\beta$ depends on the weight of the heaviest edge.
 
-The $(\alpha,\beta)-approximate$ distance oracle or in short $(\alpha,\beta)$ distance oracle returns stretch $(\alpha,\beta)$ estimates.
+\begin{definition}
+    An $(\alpha,\beta)-approximate$ distance oracle or in short $(\alpha,\beta)-$distance oracle is a data structure that for a given graph $G = (V,E)$ 
+    is able to return an $(\alpha, \beta)-$approximation of distance between any pair of vertices from $G$ in constant time.
+\end{definition}
 
 \begin{definition}
     Single-Source Shortest Path or SSSP Problem consists of finding the distances between a given vertex $v$ and all other vertices in the graph. 
@@ -138,6 +192,11 @@ The $(\alpha,\beta)-approximate$ distance oracle or in short $(\alpha,\beta)$ di
     All-Pairs $Approximate$ Shortest Path or APASP Problem consists of finding approximate distances between all pairs of vertices in the graph. 
 \end{definition}
 
+\begin{definition}
+    The vertex $u$ have degree $\deg(u)~=~a$ when number of edges incident to $u$ plus number of edges connecting $u$
+    with itself (loops) amounts to $a$\footnote{Every loop is also incident to its vertex}.
+\end{definition}
+
 \chapter{Theoretical Limitations} \label{theoreticalLimitations}
 
 \section{Space Lower Bound}
@@ -146,80 +205,161 @@ The $(\alpha,\beta)-approximate$ distance oracle or in short $(\alpha,\beta)$ di
 \end{definition}
 
 \begin{definition} 
-    The girth of the graph is the length of it's shortest simple cycle. 
+    The girth of the graph is the length of its shortest simple cycle. 
 \end{definition}
 
 \begin{theorem} \label{lotsOfEdgesLittleGirth}
-    A graph with at least $\frac{1}{2} * n^{1 + 1/k}$ edges 
+    A graph with at least $\frac{1}{2} n^{1 + 1/k}$ edges 
     have girth not greater than $2k$
 \end{theorem}
 
-
 \begin{proof}
-    We will prove the lemma for $k=2$. Full proof can be found in Alon $et~al.$~\cite{alon}.
+    We will prove the lemma for $k=2$. Full proof can be found in Alon et~al \cite{alon}.
     \newline
-    Suppose that there exist graph $G$ with $\frac{1}{2} * n^{1 + 1/k}$ or more edges, that have girth at least $2k+1$.
+    Suppose that there exist graph $G$ with $\frac{1}{2} n^{1 + 1/k}$ or more edges, that have girth at least $2k+1$.
     In other words $G$ does not have a simple cycle of length $2k$ or less.
     \newline
-    The vertex $u$ have degree $deg(u)~=~a$ when number of edges incident to $u$ plus number of edges connecting $u$ with itself (loops) amounts to $a$
-    \footnote{Every loop is also incident to its vertex}.
-    \newline
-    Let $nei_a(v)~=~\{u~\in~V~|~\delta(v,~u)~=~a\}$
+    Let N$_a(v)~=~\{u~\in~V~|~\delta(v,~u)~=~a\}$
     \newline
     For $2~\leq~i~\leq~k$ we show that
-    $$|nei_{i}(v)| = \sum_{u \in nei_{i-1}(v)} (deg(u)-1)$$
+    $$|\text{N}_{i}(v)| = \sum_{u \in N_{i-1}(v)} (\deg(u)-1)$$
     as
     \newline
-    1. Every vertex $u$ from set $nei_{i-1}(v)$ have exactly one edge $(u, l)$
+    1. Every vertex $u$ from set N$_{i-1}(v)$ have exactly one edge $(u, l)$
     such that $\delta(v, l)\leq i-1$
     \newline
     and 
     \newline
-    2. There is no two distinct edges $(u, l),~(w, l)$ satisfying $u,w \in nei_{i-1}(v),$ $l\in~V$ 
+    2. There are no two distinct edges $(u, l),~(w, l)$ satisfying $u,w \in $N$_{i-1}(v),$ $l\in~V$ 
 
 
     \begin{figure}[h]
-    \includegraphics[width=8cm]{images/placeholder_neikv}
-    \centering
-    \caption{Placeholder for $|nei_{2}(v)|$}
+    \begin{tikzpicture}
+        \SetVertexStyle[
+            TextFont = \LARGE,
+            Shape = circle,
+            FillColor = white,
+            MinSize = 8,
+            InnerSep = 0,
+            LineWidth= 1.5,
+        ]
+        \SetEdgeStyle[
+            Color= black
+        ]
+        % \draw[help lines] (0,0) grid (10,6);                
+        \Vertex[x=0,y=3.75, label=$v$, position=above left]{v};
+        \Vertex[x=3,y=6]{11};
+        \Vertex[x=3,y=4.5]{12};
+        \Vertex[x=3,y=3]{13};
+        \Vertex[x=3,y=1.5]{14};
+        \SetEdgeStyle[
+            Color= black
+        ]
+        \Edge(v)(11);
+        \Edge(v)(12);
+        \Edge(v)(13);
+        \Edge(v)(14);
+        \Vertex[x=6,y=6]{21};
+        \Vertex[x=6,y=5]{22};
+        \Vertex[x=6,y=4]{23};
+        \Vertex[x=6,y=3]{24};
+        \Vertex[x=6,y=2]{25};
+        \Vertex[x=6,y=1]{26};
+        \Edge(12)(21);
+        \Edge(12)(22);
+        \Edge(13)(23);
+        \Edge(13)(24);
+        \Edge(13)(25);
+        \Edge(14)(26);
+        \Vertex[x=9,y=6]{31};
+        \Vertex[x=9,y=5]{32};
+        \Vertex[x=9,y=4]{33};
+        \Vertex[x=9,y=3]{34};
+        \Vertex[x=9,y=2]{35};
+        \Vertex[x=9,y=1]{36};
+        \Edge(22)(23);
+        \Edge(21)(31);
+        \Edge(21)(32);
+        \Edge(22)(33);
+        \Edge(24)(33);
+        \Edge(24)(34);
+        \Edge(25)(35);
+        \Edge(26)(36);
+        \Edge(25)(36);
+        \SetEdgeStyle[
+            Color= red,
+        ]
+        \Vertex[x=2.5, y=0.5, size=0]{rect11};
+        \Vertex[x=3.5, y=0.5, size=0]{rect12};
+        \Vertex[x=3.5, y=7, size=0]{rect13};
+        \Vertex[x=2.5, y=7, size=0]{rect14};
+        \Edge(rect11)(rect12);
+        \Edge(rect12)(rect13);
+        \Edge(rect13)(rect14);
+        \Edge(rect14)(rect11);
+        \Vertex[x=3, y=7, size=0, label=N$_1(v)$, position=above, fontcolor=red];
+
+        \Vertex[x=5.5, y=0.5, size=0]{rect21};
+        \Vertex[x=6.5, y=0.5, size=0]{rect22};
+        \Vertex[x=6.5, y=7, size=0]{rect23};
+        \Vertex[x=5.5, y=7, size=0]{rect24};
+        \Edge(rect21)(rect22);
+        \Edge(rect22)(rect23);
+        \Edge(rect23)(rect24);
+        \Edge(rect24)(rect21);
+        \Vertex[x=6, y=7, size=0, label=N$_2(v)$, position=above, fontcolor=red];
+
+        \Vertex[x=8.5, y=0.5, size=0]{rect21};
+        \Vertex[x=9.5, y=0.5, size=0]{rect22};
+        \Vertex[x=9.5, y=7, size=0]{rect23};
+        \Vertex[x=8.5, y=7, size=0]{rect24};
+        \Edge(rect21)(rect22);
+        \Edge(rect22)(rect23);
+        \Edge(rect23)(rect24);
+        \Edge(rect24)(rect21);
+        \Vertex[x=9, y=7, size=0, label=N$_{3}(v)$, position=above, fontcolor=red];                  
+    \end{tikzpicture}                                       
+    \centering              
+    \caption{$|$N$_{k}(v)|$ for $k = 2$}
     \end{figure}
 
-    \newpage
-
-    We note that $u\in nei_i(v) \iff v\in nei_i(u)$, so for $2~\leq~i~\leq~k$ we have:
-    $$\sum_{v \in V}|nei_i(v)|~=
-    ~\sum_{v \in V}\sum_{u \in nei_{i-1}(v)} (deg(u) - 1)~=$$
-    $$=~\sum_{u \in V}\sum_{v \in nei_{i-1}(u)}(deg(u) - 1)$$
-    $$=~\sum_{u \in V}((|nei_{i-1}(u)|)*(deg(u) - 1))$$
+    We note that $u\in $N$_i(v) \iff v \in $N$_i(u)$, so for $2~\leq~i~\leq~k$ we have:
+    $$\sum_{v \in V}|\text{N}_i(v)|~=
+    ~\sum_{v \in V}\sum_{u \in \text{N}_{i-1}(v)} (\deg(u) - 1)~=$$
+    $$=~\sum_{u \in V}\sum_{v \in \text{N}_{i-1}(u)}(\deg(u) - 1)$$
+    $$=~\sum_{u \in V}((|\text{N}_{i-1}(u)|)(\deg(u) - 1))$$
     For every $v~\in~V$ the following is true:
     \begin{equation}\label{allNeighboursCount}
-    \sum_{i=0}^{k} |nei_i(v)|=|\{u~\in~V~|~\delta(v,~u)~\leq~k\}|~\leq~|V|~=~n
+    \sum_{i=0}^{k} |\text{N}_i(v)|=|\{u~\in~V~|~\delta(v,~u)~\leq~k\}|~\leq~|V|~=~n
     \end{equation}
     However, if we look at the sum:
-    $$\sum_{v \in V}\sum_{i=0}^{k} |nei_i(v)|~=
-    ~\sum_{v \in V}(1 + |nei_1(v)| + \sum_{i=2}^{k} |nei_i(v)|)~=$$
-    $$=~n+\sum_{v \in V}(|nei_1(v)|)+\sum_{v \in V}\sum_{i=2}^{k} |nei_i(v)|~=$$
-    $$=~n+\sum_{v \in V}(deg(v))+\sum_{v \in V}\sum_{i=2}^{k}\sum_{u \in nei_{i-1}(v)} (deg(u) - 1)~=~~(\textnormal{for}~k=2)$$
-    $$=~n+\sum_{v \in V}(deg(v))+\sum_{v \in V}\sum_{u \in nei_1(v)} (deg(u) -1)~=$$
-    $$=~n+\sum_{v \in V}(deg(v))+\sum_{u \in V}((|nei_1(u)|)*(deg(u) -1))~=$$
-    $$=~n+\sum_{v \in V}(deg(v))+\sum_{u \in V}((deg(u))*(deg(u) -1))~=$$
-    $$=~n+\sum_{u \in V}((deg(u))*(deg(u)))~\geq~n+n*(avg~deg)^2~=$$
-    $$=~n+n*(n^{1/2})^2~=~n*(n+1)~>~n^2$$
+    \begin{align}
+        \sum_{v \in V}\sum_{i=0}^{k} |\text{N}_i(v)|~&=
+        ~\sum_{v \in V}(1 + |\text{N}_1(v)| + \sum_{i=2}^{k} |\text{N}_i(v)|)~= \nonumber\\ 
+        &=~n+\sum_{v \in V}(|\text{N}_1(v)|)+\sum_{v \in V}\sum_{i=2}^{k} |\text{N}_i(v)|~= \nonumber\\
+        &=~n+\sum_{v \in V}(\deg(v))+\sum_{v \in V}\sum_{i=2}^{k}\sum_{u \in \text{N}_{i-1}(v)} (\deg(u) - 1)~=~~~(\textnormal{for}~k=2) \nonumber\\
+        &=~n+\sum_{v \in V}(\deg(v))+\sum_{v \in V}\sum_{u \in \text{N}_1(v)} (\deg(u) -1)~= \nonumber\\
+        &=~n+\sum_{v \in V}(\deg(v))+\sum_{u \in V}((|\text{N}_1(u)|)(\deg(u) -1))~= \nonumber\\
+        &=~n+\sum_{v \in V}(\deg(v))+\sum_{u \in V}((\deg(u))(\deg(u) -1))~= \nonumber\\
+        &=~n+\sum_{u \in V}((\deg(u))(\deg(u)))~\geq~n+n(\textnormal{avg}\deg)^2~= \nonumber\\
+        &=~n+n(n^{1/2})^2~=~n(n+1)~>~n^2 \nonumber
+    \end{align}
 
-    where $avg~deg = \frac{2m}{n}$ is the average degree of a vertex.
+    where $\text{avg}\deg = \frac{2m}{n}$ is the average degree of a vertex.
 
-    This contradicts \ref{allNeighboursCount}
+    This contradicts Equation \ref{allNeighboursCount}
 \end{proof}
 
-It is conjectured by Erd{\"o}s \cite{erdos1963} and others that the Theorem \ref{lotsOfEdgesLittleGirth} is tight.
+It is conjectured by Erd{\"o}s \cite{erdos1963} and others that Theorem \ref{lotsOfEdgesLittleGirth} is tight.
 Namely, it is conjectured that for any $k\geq1$, that there are graphs with
-$\Omega(n^{1 + 1/k})$ edges and girth greater than $2k$. The conjecture is known to be true for $k=1,2,3,5$
+$\Omega(n^{1 + 1/k})$ edges and girth greater than $2k$. The conjecture is known to be true for $k=1,2,3,5$.
 
 \begin{remark}
-For any graph of girth $2k+1$ it's bipartisan subgraphs have girth $2k+2$ or greater as simple cycles in bipartisan graphs have even length and subgraphs can't have smaller girth.
+    For any graph of girth $2k+1$ its bipartite subgraphs have girth $2k+2$ or greater
+    as simple cycles in bipartite graphs have even length and subgraphs can't have smaller girth than original graph.
 \end{remark}
 
-Since graphs with girth greater than $1$ do not have loops, they have a bipartisan subgraph with at least half the edges, so
+Since graphs with girth greater than $1$ do not have loops, they have a bipartite subgraph with at least half the edges, so
 there are graphs with at least $\Omega(n^{1 + 1/k})$ edges and girth greater than $2k+1$.
 
 \begin{lemma}
@@ -227,12 +367,12 @@ there are graphs with at least $\Omega(n^{1 + 1/k})$ edges and girth greater tha
     must use at least $m$ bits of storage for girth $k > \alpha + \beta + 1$ graphs, where $m$ is a number of edges.
 \end{lemma}
 \begin{proof}
-    Let $G$ be a girth $k > \alpha + \beta + 1$ graph with $n$ vertices and $m$ edges.
+    Let $G$ be a girth $k > \alpha + \beta + 1$ unweighted graph with $n$ vertices and $m$ edges.
     Let $H$ be any subgraph of $G$ and $\delta_H(u,v)$ be a distance between vertices $u$, $v$ in $H$.
     
     Consider any edge $(u, v)$ from $G$.
     If $(u, v)$ is in $H$ then $\delta_H(u,v) = 1$, but otherwise $\delta_H(u,v) \geq k - 1$, since the girth of $H$ is not less than $k$.
-    The oracle will report distance between $u$ and $v$ at most $1*\alpha + \beta$, if edge $(u,v)$ in $H$,
+    The oracle will report distance between $u$ and $v$ at most $\alpha + \beta$, if edge $(u,v)$ in $H$,
     but not less than $k-1$ otherwise. 
     
     Consequently, the generated structure must be different for subgraphs of $G$ with different edge sets.
@@ -241,38 +381,67 @@ there are graphs with at least $\Omega(n^{1 + 1/k})$ edges and girth greater tha
 
 \begin{remark}
     An $(\alpha, \beta)$ distance oracle must take at least $\Omega(n^{1+1/k})$ memory, where
-    $k=\ceil{(\alpha + \beta + 1)/2}$, if the 1963 Erd{\"o}s girth conjecture is true.
+    $k=\ceil{(\alpha + \beta + 1)/2}$, if the Erd{\"o}s girth conjecture is true.
 \end{remark}
 
 \begin{remark}
-    This points to the space lower bound of $\Omega(n^{3/2})$ for $(3,0)$ and $(2,1)$ distance oracles.
-    The bound for $(3, 0)$ distance oracle is tight up to $\Theta(k~log~n)$ due to Oracle by Thorup and Zwick \cite{a0OraclesBasic},
-    described in this paper.
-    Additionally any oracle with $\alpha + \beta < 3$ must take at least $\ceil{\frac{n*(n-1)}{4}}$ bits of storage for some graphs as there exists girth $4$ graph with that many edges.
+    This points to the space lower bound of $\Omega(n^{3/2})$ for $(3,0)$ and $(2,1)$ distance oracles for both weighted and unweighted graphs.
+    The bound for $(3, 0)$ distance oracle is tight up to $\Theta(k~\log~n)$\footnote{$\log n$ factor is here because machine word is assumed to have $\Theta(\log n)$ bits.}
+    due to oracle by Thorup and Zwick \cite{a0OraclesBasic}, described in Chapter \ref{30DistanceOracle}.
+    Additionally any oracle with $\alpha + \beta < 3$ must take at least $\ceil{\frac{n(n-1)}{4}}$ bits of storage for some graphs as there exists girth $4$ graph with that many edges.
 \end{remark}
 
 \begin{conjecture} \label{setIntersectionQueries} \cite{21OracleLessMemory}
     Consider a data structure that preprocesses sets $S_1, \ldots, S_n \subseteq [X]$, and answers queries of the form "does $S_i$ intersect $S_j$?".
     Let $X = \text{lg}^c n$ for a large enough constant $c$.
-    If the query takes constant time, the space must be $\Omega(n^2 /$ poly log $ n)$.
+    If the query takes constant time, the space must be $\tilde{\Omega}(n^2)$.
 \end{conjecture}
 
 \begin{theorem} \label{alphaAbove2} \cite{21OracleLessMemory}
-    A distance oracle for undirected, unweighted graphs with $m = O(n $ poly log $ n)$ edges, which can distinguish between distances of $2$ and $4$ in constant time
-    requires $O(n^2 $ poly log $ n)$ space assuming conjecture \ref{setIntersectionQueries}
+    A distance oracle for undirected, unweighted graphs with $m = \tilde{O}(n)$ edges, which can distinguish between distances of $2$ and $4$ in constant time
+    requires $\tilde{O}(n^2)$ space assuming Conjecture \ref{setIntersectionQueries}
 \end{theorem}
 
 \begin{proof}
     Build a bipartite graph, with $n$ vertices on the left, numbered from $1$ to $n$ and $X$ on the right, numbered $1$ to $X$. The number of vertices
-    is $n + X = O(n)$. Connect left vertex $i$ to the elements of $S_i$ on the right. The number of edges is no more than $nX = O(n * $ poly log $n)$.
+    is $n + X = O(n)$. Connect left vertex $i$ to the elements of $S_i$ on the right. The number of edges is no more than $nX = \tilde{O}(n)$.
     Two left vertices are at distance $2$ if the corresponding sets intersect, and distance at least $4$ otherwise.
     Thus, the distance oracle can solve set intersection queries.
 \end{proof}
 
 \begin{figure}[h]
-    \includegraphics[width=8cm]{images/placeholder_setintersection}
-    \centering
-    \caption{Placeholder for Theorem \ref{alphaAbove2}}
+    \begin{tikzpicture}
+        \SetVertexStyle[
+            TextFont = \Large,
+            Shape = circle,
+            FillColor = white,
+            MinSize = 8,
+            InnerSep = 0,
+            LineWidth= 1.5,
+        ]
+        
+        \Vertex[x=0,y=6, label=$1$, position=left]{1};
+        \Vertex[x=0,y=5, label=$2$, position=left]{2};
+        \Vertex[x=0,y=3, label=$n$, position=left]{n};
+        \node [rotate=90] at ($(2)!.4!(n)$) {\Huge\ldots};    
+        \Vertex[x=3,y=7, label=$1$, position=right]{x1};
+        \Vertex[x=3,y=6, label=$2$, position=right]{x2};
+        \Vertex[x=3,y=5, label=$3$, position=right]{x3};
+        \Vertex[x=3,y=4, label=$4$, position=right]{x4};
+        \Vertex[x=3,y=2, label=$X$, position=right]{x};
+        \node [rotate=90] at ($(x4)!.4!(x)$) {\Huge\ldots};
+        \Edge(1)(x1)
+        \Edge(1)(x2)
+        \Edge(n)(x)
+        \Edge(n)(x4)
+        \SetEdgeStyle[
+            Color= red
+        ]
+        \Edge(1)(x3)
+        \Edge(2)(x3)
+    \end{tikzpicture}                                       
+    \centering              
+    \caption{Example graph from Theorem \ref{alphaAbove2}. $S_1$ and $S_2$ intersect.}
 \end{figure}
 
 \begin{remark}
@@ -281,26 +450,29 @@ there are graphs with at least $\Omega(n^{1 + 1/k})$ edges and girth greater tha
     The number of vertices in the new graph will be $n + (c-1)m = O(n + m)$, number of edges will be $cm = O(m)$.
 \end{remark}
 
-In consequence any Oracle that can distinguish between distances $2c$ and $4c$ in constant time must use $\Omega(n'^2 /$ poly log $ n') = \Omega(n^2 /$ poly log $ n)$ space,
-where $n = O(c * (n' * $ poly log $n'))$, so $n' = O(n/$ poly log $n)$.
+In consequence any Oracle that can distinguish between distances $2c$ and $4c$ in constant time must use $\tilde{\Omega}(n'^2) = \tilde{\Omega}(n^2)$ space,
+where $n = \tilde{O}(cn')$, so $n' = \tilde{O}(n)$.
 
-An $(\alpha, \beta)$ distance oracle must take $O(n^2/ $ poly log $n)$ space if $\alpha < 2$, assuming conjecture \ref{setIntersectionQueries}
+An $(\alpha, \beta)$ distance oracle must take $\tilde{O}(n^2)$ space if $\alpha < 2$, assuming Conjecture \ref{setIntersectionQueries}.
 
 \section{Preprocessing Time Lower Bound}
 % Maybe stretch less than $2$ and constant surplus?
-The stretch $2$ or constant surplus distance oracle is smallest stretch oracle that possibly could calculate all distance estimates in less time than boolean matrix multiplication.
+Stretch$-2$ or constant surplus distance oracle is smallest stretch oracle that possibly could calculate all distance estimates in less time than boolean matrix multiplication.
 This is because any algorithm that computes all-pairs approximate distances with stretch less than $2$ (or surplus only)
 could be used to compute boolean matrix multiplication \cite{matrixLowerBound}.
 
-For directed graphs any constant stretch could be used to compute boolean matrix multiplication (also in \cite{matrixLowerBound})
+For directed graphs any constant stretch could be used to compute boolean matrix multiplication (also in \cite{matrixLowerBound}).
 
-$m^{5/3 - o(1)}$ time is required for a stretch $(2 + o(1))$ oracle based on 3-SUM conjecture\cite{3sumLowerBound}
+$m^{5/3 - o(1)}$ time is required for a stretch $(2 + o(1))$ oracle based on 3-SUM Conjecture \cite{3sumLowerBound}.
 
 
 
 
 \chapter{(3,0) Distance Oracle} \label{30DistanceOracle}
-We present the slightly modified $(2k-1)-approximate$ distance oracle of Thorup and Zwick\cite{a0OraclesBasic}
+
+\section{Oracle by Thorup and Zwick}
+
+We present the slightly modified $(2k-1)-approximate$ distance oracle of Thorup and Zwick \cite{a0OraclesBasic}.
 
 \begin{theorem}
 Let $G~=~(V,~E)$ be an undirected \underline{weighted} graph with non-negative weights and $|V|~=~n$ vertices and $|E|~=~m$ edges.
@@ -315,9 +487,7 @@ can be retrieved in $O(k)$ time.
 \begin{definition}
     A distance between sets $X, Y \subseteq V$ denoted $\delta(X,Y)$ is equal to the distance
     between closest vertices in those sets. 
-    \newline
-    More precisely 
-    $\delta(X,Y) = \liminf\{\delta(u,v) ~|~ u\in X, v\in Y\}$ \newline
+    More formally $\delta(X,Y) = \liminf\{\delta(u,v) ~|~ u\in X, v\in Y\}$
     A distance between vertex $v$ and set $X \subseteq V$ denoted $\delta(v,X)$ or $\delta(X,v)$
     is equal to $\delta(\{v\},X)$ or $\delta(X,\{v\})$ respectively.
 \end{definition}
@@ -332,20 +502,6 @@ can be retrieved in $O(k)$ time.
     $u\in C_X(v) \iff v\in B_X(u)$ or in other words
     $C_X(v) = \{u \in V ~|~ \delta(u,v) < \delta(u, X)\}$
 \end{definition}
-
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[h]{0.495\textwidth}
-        \centering
-        \includegraphics[height=5cm]{images/placeholder_ball}
-        \caption{Placeholder for ball}
-    \end{subfigure}
-    \begin{subfigure}[h]{0.495\textwidth}
-        \centering
-        \includegraphics[height=5cm]{images/placeholder_cluster}
-        \caption{Placeholder for cluster}
-    \end{subfigure}
-\end{figure}
 
 Let $V = A_0 \supseteq A_1 \supseteq \ldots \supseteq A_k = \emptyset$ be a non increasing 
 sequence of sets.
@@ -366,10 +522,24 @@ sequence of sets.
     or more verbosely clum$(v) = \bigcup_{i=0}^{k-1}\{ u\in A_i \setminus A_{i+1} ~|~ \delta(u,v) < \delta(u, A_{i+1}) \}$
 \end{definition}
 
-\begin{figure}[h]
-    \includegraphics[width=10cm]{images/placeholder_bunch}
+\begin{figure}[H]
     \centering
-    \caption{Placeholder for bunch}
+    \begin{subfigure}[h]{0.495\textwidth}
+        \centering
+        \includegraphics[width=6cm]{images/balls}
+        \caption{Balls}
+    \end{subfigure}
+    \begin{subfigure}[h]{0.495\textwidth}
+        \centering
+        \includegraphics[width=6cm]{images/clusters}
+        \caption{Clusters}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=10cm]{images/bunch}
+    \centering
+    \caption{Bunch for $k=3$}
 \end{figure}
 
 \noindent\fbox{
@@ -382,7 +552,7 @@ sequence of sets.
 
     for $i \leftarrow 1$ to $k-1$
 
-        ~~~~let $A_i$ be an uniform sample from $A_{i-1}$ of size $\ceil[\big]{n^{-1/k} * |A_{i-1}|}$
+        ~~~~let $A_i$ be an uniform sample from $A_{i-1}$ of size $\ceil[\big]{n^{-1/k} |A_{i-1}|}$
 
     for every $v \in V$
 
@@ -400,6 +570,8 @@ sequence of sets.
 
     \end{minipage}
 }
+
+~
 
 \noindent\fbox{
     \begin{minipage}{\textwidth -14.1pt}
@@ -420,6 +592,8 @@ sequence of sets.
     \end{minipage}
 }
 
+~
+
 As $n^{-1/k} > 0$ the sample size is greater than $0$, so $A_{i} \neq \emptyset$, for $0 \leq i < k$.
 
 \section{Correctness}
@@ -429,27 +603,27 @@ since $p_{k-1}(u) \in A_{k-1} \subseteq $ bun$(v)$ for every $u,v \in V$.
 This means query time $O(k)$.
 
 \begin{lemma}
-$\delta(u, p_{A_i}(u))$ is at most $i*\delta(u,v)$
+$\delta(u, p_{A_i}(u))$ is at most $i\delta(u,v)$
 for as long as the $\mathbf{basicdist}_k(u, v)$ did not terminate in $i-1$ steps.
 \end{lemma}
 \begin{proof} 
 The proof is by induction:
 \newline
-If the program terminates immediately then $\delta(u, p_0(u)) = \delta(u, u) = 0$.
+If the algorithm terminates immediately then $\delta(u, p_0(u)) = \delta(u, u) = 0$.
 \newline
-If the program did not terminate in $i-1$ steps then 
+If the algorithm did not terminate in $i-1$ steps then 
 \newline
 $p_{i-1}(v) \notin $ bun$(u)$, so
 $\delta(u, p_{i-1}(v)) \geq \delta(u, A_{i}) = \delta(u, p_{A_i}(u))$ and
 \newline
 $\delta(p_{i-1}(v), v) \leq (i-1)\delta(u, v)$, this combined gives
 \newline
-$\delta(u, p_{A_i}(u)) \leq \delta(u, p_{i-1}(v)) \leq \delta(p_{i-1}(v), v) + \delta(v, u) \leq i*\delta(u, v)$
+$\delta(u, p_{A_i}(u)) \leq \delta(u, p_{i-1}(v)) \leq \delta(p_{i-1}(v), v) + \delta(v, u) \leq i\delta(u, v)$
 \end{proof}
 
 The distance returned by $\mathbf{basicdist}_k(u, v)$ is at most $(2k - 1)\delta(u,v)$ as
 with the triangle inequality we have \newline
-$\delta(u,p_{A_i}(u)) + \delta( p_{A_i}(u), v) \leq 2*\delta(u,  p_{A_i}(u)) + \delta(u,v) = (2i + 1)\delta(u,v) \leq (2k - 1)\delta(u,v)$
+$\delta(u,p_{A_i}(u)) + \delta( p_{A_i}(u), v) \leq 2\delta(u,  p_{A_i}(u)) + \delta(u,v) = (2i + 1)\delta(u,v) \leq (2k - 1)\delta(u,v)$
 
 
 \section{Size of the Structure}
@@ -463,13 +637,13 @@ For each vertex $v \in V$ we store:
 \end{itemize}
 
 In order to store balls and distances in constant memory per entry and constant retrieve time we will use hash tables.
-They can be computed in linear expected time\cite{2LevelHashTable} or
-they can be computed deterministically is $O(s $ log $ s $ log $ n)$ time.\cite{hashTableDerandomization}, where $s$ in number of entries to be stored.
+They can be computed in linear expected time \cite{2LevelHashTable} or
+they can be computed deterministically is $O(s $ log $ s $ log $ n)$ time \cite{hashTableDerandomization}, where $s$ in number of entries to be stored.
 
-The total size of the data structure is $O(kn + \sum_{v \in V}|$bun$(v)|)$
+The total size of the data structure is therefore $O(kn + \sum_{v \in V}|$bun$(v)|)$.
 
 \begin{lemma} \label{ballSize}
-    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $\ceil[\big]{p * |X|}$.
+    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $\ceil[\big]{p|X|}$.
     Then for $v \in V$ the expected size of $B_{S}(v) \cap X$ is less than $1/p$.
 \end{lemma}
 
@@ -483,45 +657,45 @@ The total size of the data structure is $O(kn + \sum_{v \in V}|$bun$(v)|)$
     If we look at Pr$[w_j \in S] \geq p$ we see that 
     $$\text{Pr}[w_j \in B_{S}(v)] \leq
     \text{Pr}[\{w_1, w_2, \ldots, w_j\} \cap S = \emptyset] \leq (1 - p)^j$$
-    
+
     $$\mathbf{E}[B_{S}(v) \cap X] = \sum_{j=1}^{l} \text{Pr}[w_j \in B_{S}(v)] \leq \sum_{j=1}^{l}(1-p)^j < p^{-1}$$
+    This concludes the proof.
 \end{proof}
 
 \begin{theorem} \label{ballSizeStrong}
-    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $q*\ceil[\big]{p * |X|}$, where $q$ is an positive integer.
+    Let $X \subseteq V$, $S$ be an uniform sample from $X$ of size $q\ceil[\big]{p|X|}$, where $q$ is an positive integer.
     Then for $v \in V$ the expected value of $|B_{S}(v) \cap X|^q$ is less than $1/p^q$.
 \end{theorem}
 
 \begin{proof}
-    By Lemma \ref{ballSize} we can take $q$ uniform samples $S_1, S_2, \ldots, S_q$ of size $\ceil[\big]{p * |X|}$,
+    By Lemma \ref{ballSize} we can take $q$ uniform samples $S_1, S_2, \ldots, S_q$ of size $\ceil[\big]{p |X|}$,
     and the expected value of $|B_{S_i}(v) \cap X|$, for $v \in V$, $0 < i \leq q$ will be less than $1/p$.
     However for a given $v \in V$ the order $w_1, w_2, \ldots, w_l$ could be constant for all samples $S_i$,
     which means that it is independent from the samples. Additionally the samples are independent from each other,
     so the expected values of the upper bounds on $|B_{S_i}(v) \cap X|$ are independent, which gives:
-
     $$\mathbf{E}[|B_{S}(v) \cap X|^q] \leq \mathbf{E}[|B_{(\cup_{i = 1}^{q} S_i)}(v) \cap X|^q] \leq \mathbf{E}[\Pi_{i = 1}^{q} |B_{S_i}(v) \cap X|] < 1/p^q$$
-
-    We can think of $B_{\cup_{i = 1}^{q} S_i}(v)$ as an uniform sample $S'$ from $X$ of size $\leq q*\ceil[\big]{p * |X|}$.
+    We can think of $B_{\cup_{i = 1}^{q} S_i}(v)$ as an uniform sample $S'$ from $X$ of size $\leq q\ceil[\big]{p|X|}$.
     We can then select uniformly elements one by one that are not yet in the sample and add them to sample until we got a sample of size $|S|$.
     The sample constructed that way will be uniform, and in each step $B_{S'}(v) \cap X$ will not get any new elements.
 \end{proof}
 
-Theorem \ref{ballSizeStrong} shows that balls $B_S(v)$, $v \in V$, $S$ uniform sample from $V$ of size $\ceil(p*n)$ are unlikely to grow much bigger then $1/p$.\newline
+Theorem \ref{ballSizeStrong} shows that balls $B_S(v)$, $v \in V$, $S$ uniform sample from $V$ of size $\ceil(pn)$ are unlikely to grow much bigger than $1/p$.
+
 Note that this does not applies to clusters $C_S(v)$, which in turn are unlikely to intersect with each other much more times than $4n/p^2$,
 as every cluster intersection means that both vertices that have their clusters intersecting belong to the same ball.
-We have $n$ balls with expected square of their size (amount of different pairs of vertices in them) being lower than $\sim 1/(p/2)^2$ ($=$ if $p * n$ is even)
+We have $n$ balls with expected square of their size (amount of different pairs of vertices in them) being lower than $\sim 1/(p/2)^2$ ($=$ if $p n$ is even)
 
 \begin{theorem}
-    expected size of bun$(v)$, $v \in V$ is at most $kn^{1/k} + k$
+    Expected size of bun$(v)$, $v \in V$ is at most $kn^{1/k} + k$
 \end{theorem}
 \begin{proof}
     The size of $A_{k-1} \setminus A_k$ is less than $n^{1/k} + k$, as $A_k = \emptyset$ and by induction
-    $$(n^{-1/k})^{i-1} * |A_{k-i}| + i - 1 \leq (n^{-1/k})^{i-1} * (n^{-1/k} * |A_{k-(i+1)}| + 1) + i - 1 \leq$$ 
-    $$\leq (n^{-1/k})^{i} * |A_{k-(i+1)}| + i~~~~(\text{for}~~1 \leq i \leq k-1)$$
-    so $|A_{k-1} \setminus A_k| = |A_{k-1}| = (n^{-1/k})^0 * |A_{k-1}| \leq (n^{-1/k})^{k-1} * |A_{0}| + k - 1 = n^{1/k} + k - 1$
+    $$(n^{-1/k})^{i-1} |A_{k-i}| + i - 1 \leq (n^{-1/k})^{i-1} (n^{-1/k} |A_{k-(i+1)}| + 1) + i - 1 \leq$$ 
+    $$\leq (n^{-1/k})^{i} |A_{k-(i+1)}| + i~~~~(\text{for}~~1 \leq i \leq k-1)$$
+    so $|A_{k-1} \setminus A_k| = |A_{k-1}| = (n^{-1/k})^0 |A_{k-1}| \leq (n^{-1/k})^{k-1} |A_{0}| + k - 1 = n^{1/k} + k - 1$
     
     For $0 \leq i < k-1$ we show that expected size of bun$(v) \cap A_i$ for $0 \leq i < k-1$ is by Lemma \ref{ballSize}
-    at most $n^{1/k}$. Indeed, $A_{i+1}$ is an uniform sample from $A_i$ of size $\ceil[\big]{p * |A_i|}$ for $p = n^{-1/k}$.
+    at most $n^{1/k}$. Indeed, $A_{i+1}$ is an uniform sample from $A_i$ of size $\ceil[\big]{p |A_i|}$ for $p = n^{-1/k}$.
     Since no element of $B_{A_j}(v)$ is in $A_i$ for $0 \leq j \leq i$ and
     no element of $A_{j}$ is in $B_{A_{i+1}}(v)$ for $i+1 \leq j \leq k-1$, sets $B_{A_{i+1}}(v) \cap A_i$ for $0 \leq i \leq k-1$ are disjoint, so
     bun$(v) \cap A_i = B_{A_{i+1}}(v) \cap A_i \leq 1/p = n^{1/k}$.
@@ -530,7 +704,7 @@ We have $n$ balls with expected square of their size (amount of different pairs 
     and $|A_{k-1} \setminus A_k| < n^{1/k} + k$ completes the proof.
 \end{proof}
 
-The expected size of the structure is $O(kn + n*(kn^{1/k}+k)) = O(kn^{1 + 1/k})$
+The expected size of the structure is $O(kn + n(kn^{1/k}+k)) = O(kn^{1 + 1/k})$.
 We can get data structure of deterministic size $O(kn^{1 + 1/k})$ by re-running the algorithm
 until data structure produced is small enough.
 By Markov's inequality the expected number of repetitions required is constant, so this will not
@@ -539,37 +713,40 @@ affect the expected running time of the algorithm.
 \section{Preprocessing Memory and Time}
 
 The calculation of all distances takes $O(nm + n $ log $n)$ time and $O(n^2)$ memory
-when using Dijkstra algorithm with Fibonacci heaps. (see Cormen et al. [\cite{cormen}, Chapter 21])
-The time could be further improved to $O(nm)$ by using efficient Thorup algorithm for undirected graphs with floating point edge weights\cite{uberDijkstraInt}\cite{uberDijkstraFloat}
+when using Dijkstra algorithm with Fibonacci heaps. (see Cormen et al. \cite[Chapter 21]{cormen})
+The time could be further improved to $O(nm)$ by using Thorups algorithm for undirected graphs with floating point edge weights \cite{uberDijkstraInt, uberDijkstraFloat}
 
 The creation of $A_i$ sets takes $O(kn)$ memory and time.
 
-The rest of the $\mathbf{basicprepro}_k(G)$ takes $O(kn^2)$ expected time and only \newline
+The rest of the $\mathbf{basicprepro}_k(G)$ takes $O(kn^2)$ expected time and 
 $O(kn^{1 + 1/k})$ deterministic memory (program is re-run if memory gets too high)
-as all calculated values are stored in Oracle.
+as all calculated values are stored in the oracle.
 
 \begin{definition}
-    auxiliary memory is the memory used by program without without counting the input, which can be read, but not written to.
+    Auxiliary memory is the memory used by program without without counting the input, which can be read, but not written to.
 \end{definition}
 
 $\mathbf{basicprepro}_k(G)$ takes $O(nm + kn^2)$ expected time and $O(n^2)$ memory in total.
 However this approach is very inefficient due to calculation of all distances. By cleverly calculating only needed distances,
-the running time could be reduced to $O(n^2)$ expected time and $O(kn^{1 + 1/k})$ auxiliary memory\cite{a0OraclesN2Time}.
+the running time could be reduced to $O(kmn^{1/k})$ \cite{21OracleBasic}, or $O(n^2)$ expected time for unweighted graphs \cite{a0OraclesN2Time}.
+The auxiliary memory in both cases is $O(kn^{1 + 1/k})$ $-$ the same as the Oracle size.
 By using deterministic $A_i$ sets creation methods,
-we can achieve the $O(mn^{1/k})$ deterministic time and $O(kn^{1 + 1/k})$ auxiliary memory\cite{a0OraclesMN1KDeterministicTime}
+we can achieve the $O(kmn^{1/k} $ poly log $n)$ deterministic time and $O(kn^{1 + 1/k})$ auxiliary memory \cite{a0OraclesMN1KDeterministicTime}
 
 
 \chapter{(2,1) Distance Oracle} \label{21DistanceOracle}
 
-We present the $(2,1)-approximate$ distance oracle of Surender Baswana, Vishrut Goyal, and Sandeep Sen.\cite{21OracleBasic},
-modified to work on weighted graphs.
+\section{Oracle by Baswana, Goyal, and Sen}
+
+We present the $(2,1)-approximate$ distance oracle of Baswana, Goyal, and Sen \cite{21OracleBasic},
+modified by us to work on weighted graphs.
 
 
 \begin{theorem}
     Let $G~=~(V,~E)$ be an undirected \underline{weighted} graph with non-negative weights and $|V|~=~n$ vertices and $|E|~=~m$ edges.
     Let $\delta(u,v)$ denote the distance between vertices $u,v \in V$.
-    The graph can be preprocessed in $O(n^{7/3} $ log $ n + mn^{2/3}$ log $ n)$ expected time
-    in order to obtain data structure of size $O(n^{5/3} $ log $ n)$ such that any distance approximation
+    The graph can be preprocessed in $O(n^{7/3} \log n + mn^{2/3} \log n)$ expected time
+    in order to obtain data structure of size $O(n^{5/3} \log n)$ such that any distance approximation
     $\hat{\delta}(u,v)$ satisfying $\delta(u,v)\leq \hat{\delta}(u,v)\leq 2\delta(u, v) + h$, where h is the weight of the heaviest edge,
     can be retrieved in $O(1)$ time.
 \end{theorem}
@@ -603,6 +780,8 @@ modified to work on weighted graphs.
     \end{minipage}
 }
 
+~
+
 \noindent\fbox{
     \begin{minipage}{\textwidth -14.1pt}
     algorithm $\mathbf{dist}(u, v)$
@@ -622,34 +801,57 @@ modified to work on weighted graphs.
     \end{minipage}
 }
 
+~
+
 The biggest difference between this oracle and the $(3,0)$ distance oracle
-is that here we keep track whatever the balls of the any two vertices intersect.
+is that here we keep track whatever the balls of the any $u,v \in V$ intersect,
+and store the vertex from their intersection in $\mathcal{O}$.
 In order to do that we had to modify the construction of the $A_i$ sets in order to
 ensure that not too many balls will intersect with each other.
 
 \section{Correctness}
 
-\begin{figure}[h]
-    \includegraphics[width=14cm]{images/placeholder_distancequery}
+\begin{figure}[H]
     \centering
-    \caption{Placeholder for $\mathbf{dist}(u, v)$}
+    \begin{subfigure}[H]{0.465\textwidth}
+        \centering
+        \includegraphics[width=6.5cm]{images/case_1}
+        \caption{Case $1$: $u \in B_{A_1}(v)$ or $v \in B_{A_1}(u)$}
+    \end{subfigure}\hfill%
+    \begin{subfigure}[H]{0.465\textwidth}
+        \centering
+        \includegraphics[width=6.5cm]{images/case_2}
+        \caption{Case $2$: $B_{A_1}(u) \cap B_{A_1}(v) \neq \emptyset$}
+    \end{subfigure}
+    \begin{subfigure}[H]{0.465\textwidth}
+        \centering
+        \includegraphics[width=6.5cm]{images/case_3_worst}
+        \caption{Case $3$: $(2, h)-$approximation case. The balls are closer to each other then sum of their radii, but they do not share a vertex.}
+    \end{subfigure}\hfill%
+    \begin{subfigure}[H]{0.465\textwidth}
+        \centering
+        \includegraphics[width=6.5cm]{images/case_3}
+        \caption{Case $3$: stretch$-2$ case. The reported distance is stretch$-2$ approximation or even more accurate, if the balls are far away from each other. }
+    \end{subfigure}
 \end{figure}
 
+The worst case happen when the balls have equal radius, portals are in the opposite direction to destination and balls are as close to each other as possible without sharing a vertex. $h$ is the weight of the heaviest edge.
+
+
 \begin{lemma}
-    The distance returned by $\mathbf{dist}(u, v)$ is not less than $\delta(u,v)$ and at most $2 * \delta(u,v) + h$.
+    The distance returned by $\mathbf{dist}(u, v)$ is not less than $\delta(u,v)$ and at most $2 \delta(u,v) + h$.
 \end{lemma}
 \begin{proof}
     We will go through each of cases
     \begin{enumerate}
         \item \underline{$u \in B_{A_1}(v)$ or $v \in B_{A_1}(u)$:}\newline
             Our structure stores the $B_{A_1}(w)$, $\delta(w, q)$ for $w \in V$, $q \in B_{A_1}(w)$. Exact distance is returned.
-            \newpage
         \item \underline{$B_{A_1}(u) \cap B_{A_1}(v) \neq \emptyset$:}\newline
             Since last case did not occur, $u \notin B_{A_1}(v)$ and $v \notin B_{A_1}(u)$ we have $\delta(u,v) \geq \delta(u, A_1)$ and $\delta(u,v) \geq \delta(v, A_1)$.
             Let $w \in B_{A_1}(u) \cap B_{A_1}(v)$, we see that $\delta(u, w) < \delta(u, A_1)$, $\delta(v, w) < \delta(v, A_1)$,
-            so $\delta(u, w) + \delta(w, v) < \delta(u, A_1) + \delta(v, A_1) \leq \delta(u,v) + \delta(u,v)$
-            $\delta(u, w)$, $\delta(w, v)$ are stored in our structure.
-            \newline
+            so $\delta(u, w) + \delta(w, v) < \delta(u, A_1) + \delta(v, A_1) \leq \delta(u,v) + \delta(u,v)$.
+            The $\delta(u, w)$ and $\delta(w, v)$ are stored in our structure.
+            
             Note that for $u,v,w \in V$ we have
             $$w \in B_{A_1}(u) \cap B_{A_1}(v) \implies u,v \in C_{A_1}(w) \implies \mathcal{O}(u,v)~\text{is defined}$$
             $$\mathcal{O}(u, v) = w \implies u,v \in C_{A_1}(w) \implies w \in B_{A_1}(u) \cap B_{A_1}(v)$$
@@ -657,35 +859,46 @@ ensure that not too many balls will intersect with each other.
 
             For unweighted graphs we can remember exact $\delta(u, v)$ by choosing $w = \mathcal{O}(u,v)$ such that it is on the shortest path from $u$ to $v$.
             Such $w$ exists in unweighted graphs as the shortest path is the one with the least vertices and first $\delta(u, A_1)$ vertices, last $\delta(v, A_1)$ vertices of a path from $u$ to $v$ will be in corresponding balls.
-            This also allows us to skip the first case as \newline
+            This also allows us to skip the first case as
+
             $u \in B_{A_1}(v) \implies v \in B_{A_1}(v)$ for $v \in V$.
         \item \underline{None of the above:}\newline
             Let $x = \delta(B_{A_1}(u), B_{A_1}(v))$, $a = \delta(u, A_1)$, $b = \delta(v, A_1)$.
             Since $B_{A_1}(u) \cap B_{A_1}(v) = \emptyset$ we have $x > 0$.
             Moreover $a + b - h \leq \delta(u,v) < a + b + x$ as any vertices $w \in B_{A_1}(u)$, $q \in B_{A_1}(v)$ realizing
             $\delta(w, q) = x$ are also satisfying $a \leq \delta(u, q)$, $b - h \leq \delta(q, v)$, $\delta(u, w) < a$ and $\delta(v, q) < b$.
-            \newline
+
             Without the loss of generality we assume that $a \leq b$. We then have 
-            $$\delta(u, v) ~\leq~ \delta(u, p_{A_1}(v)) + \delta(p_{A_1}(v), v) ~\leq~ 2*\delta(u, p_{A_1}(v)) + \delta(u, v) ~=$$
-            $$=~ 2a + \delta(u,v) ~\leq~ (a + b - h) + h + \delta(u,v) ~\leq~ 2*\delta(u, v) + h$$
+            $$\delta(u, v) ~\leq~ \delta(u, p_{A_1}(v)) + \delta(p_{A_1}(v), v) ~\leq~ 2\delta(u, p_{A_1}(v)) + \delta(u, v) ~=$$
+            $$=~ 2a + \delta(u,v) ~\leq~ (a + b - h) + h + \delta(u,v) ~\leq~ 2\delta(u, v) + h$$
             $p_{A_1}(v) \in A_1$ so distances from $p_{A_1}(v)$ to all other vertices are stored in our structure.
-
-
     \end{enumerate}
+    Since every case returns $(2,h)-$approximation of the distance, the Lemma holds.
 \end{proof}
 
+~
+
 \begin{remark}
-    This Oracle is a stretch $2$ Oracle for all cases except for part of case 3.
-    For distance estimate $\hat{\delta}(u, v)$, $u,v \in V$ to be more than $2*\delta(u,v)$
-    the following must be true: distance is reported at case $3$ and $\delta(u, v) < 2*\delta(u, p_{A_1}(u))$ as our error is at most $2*\delta(u, p_{A_1}(u))$, so
-    both of the below must be true:\newline
-    $\delta(p_{A_1}(u), v) < 3*\delta(u, p_{A_1}(u))$ and $\delta(p_{A_1}(v), u) < 3*\delta(v, p_{A_1}(v))$
-    \newline
-    Those conditions could be easily verified during Oracle query.
+    The distance estimate error is bounded above by $2\delta(u, p_{A_1}(u))$,
+    as case $1$ distances are exact, case $2$ and $3$ reports exact distance between $w$ and $v$ plus $\delta(u, w)$, where $w \in V$ satisfies $\delta(u, w) < \delta(u, p_{A_1}(u))$.
+    Analogically the distance estimate error is bounded above by $2\delta(v, p_{A_1}(v))$.
 \end{remark}
 
-We can make even stronger argument, the Oracle is not a stretch $2$ only if the balls of the queried vertices have no common vertex, but they are connected by a single edge.
-This however can not be verified by this Oracle.
+This remark points to the interesting property of this oracle $-$ for a vertex $u$ we report exact distances to every vertex closer than $\delta(u, p_{A_1}(u))$ (and we know then that the distance reported is exact),
+and we report almost stretch$-1$ distances to every vertex $v$ satisfying $\delta(u, p_{A_1}(u)) << \delta(u, v)$ which is equivalent to $\delta(u, p_{A_1}(u)) << \delta(p_{A_1}(u), v)$ (and both of those values are stored in the oracle).
+
+\begin{remark}
+    This oracle is a stretch$-2$ oracle for all cases except for part of case 3.
+    For distance estimate $\hat{\delta}(u, v)$, $u,v \in V$ to be more than $2\delta(u,v)$ (or to not be exact in the case of unweighted graphs),
+    the following must be true: distance is reported at case $3$,
+    $\delta(p_{A_1}(u), v) < 3\delta(u, p_{A_1}(u))$ and $\delta(p_{A_1}(v), u) < 3\delta(v, p_{A_1}(v))$
+    Those conditions could be easily verified in constant time during oracle query.
+\end{remark}
+
+We can make even stronger argument, this distance oracle is not a stretch$-2$ distance oracle only if the balls of the queried vertices have no common vertex, but they are connected by a single edge.
+This however can not be verified by this oracle.
+
+
 
 
 \section{Improved Sampling Algorithm}
@@ -698,7 +911,7 @@ This however can not be verified by this Oracle.
 
     while $X' \neq \emptyset$
 
-    ~~~~Let $S$ be an uniform sample from $X'$ of size $\ceil[\big]{p * |X|}$ or $X'$ if $\ceil[\big]{p * |X|} > |X'|$
+    ~~~~Let $S$ be an uniform sample from $X'$ of size $\ceil[\big]{p |X|}$ or $X'$ if $\ceil[\big]{p |X|} > |X'|$
 
     ~~~~$R \leftarrow R \cup S$
 
@@ -713,9 +926,12 @@ This however can not be verified by this Oracle.
     \end{minipage}
 }
 
+~
+
 \begin{remark} \label{clusterSize}
 The algorithm $\mathbf{sample}(X, p)$ ensures that all $C_R(v)$ clusters have at most $4/p$ vertices, so all $C_{A_1}(v)$ clusters have at most $4/p$ vertices.
 This ensures that $\mathcal{O}$ have at most $16n/p^2$ defined values.
+Recall that $\mathcal{O}$ is a hash table that for each pair of vertices $(u,v) \in V \times V$ satisfying $B_{A_1}(u) \cap B_{A_1}(v) \neq \emptyset$ stores the vertex $w \in B_{A_1}(u) \cap B_{A_1}(v)$ 
 \end{remark}
 
 \begin{lemma} \label{algSampleLogSteps}
@@ -724,28 +940,27 @@ This ensures that $\mathcal{O}$ have at most $16n/p^2$ defined values.
 
 \begin{proof}
     Let $X_i$ be the set $X'$ at the beginning of $i$-th step. Note that $X_i \supseteq X_{i+1}$ as $R$ never shrinks so clusters $C_R$ never grow larger.
-    If $|X_i| < \ceil[\big]{p * |X|}$ then $|X_{i+1}| = 0$ and lemma holds.
+    If $|X_i| < \ceil[\big]{p  |X|}$ then $|X_{i+1}| = 0$ and lemma holds.
     In other case after the set $R$ is augmented by sample $S$ ($R \supseteq S$) we note that
     
 
     $$\sum_{v \in X_i} |C_R(v) \cap X| = \sum_{v \in X} |B_R(v) \cap X_i| \leq \sum_{v \in X} |B_S(v) \cap X_i| $$
     by Lemma \ref{ballSize}
-    $$\mathbf{E}[\sum_{v \in X} |B_S(v) \cap X_i|] < |X| * (p * |X|/|X_i|)^{-1} = |X_i|/p$$
+    $$\mathbf{E}[\sum_{v \in X} |B_S(v) \cap X_i|] < |X|  (p  |X|/|X_i|)^{-1} = |X_i|/p$$
 
     By Markov inequality with probability $1/2$ we have $\sum_{v \in X_i} |C_R(v) \cap X| < 2|X_i|/p$,
     and since in that case 
-    $$|X_{i+1}| * 4/p \leq \sum_{v \in X_i} |C_R(v) \cap X| < 2|X_i|/p$$
-    so $2 * |X_{i+1}| < |X_i|$ with probability at least $1/2$.
-
+    $$|X_{i+1}|  4/p \leq \sum_{v \in X_i} |C_R(v) \cap X| < 2|X_i|/p$$
+    so $2  |X_{i+1}| < |X_i|$ with probability at least $1/2$.
 \end{proof}
 
 So the expected number of steps is at most $2$ log $n$
 
-By combining above Lemma with Lemma \ref{ballSize} we can prove the following Lemma
+By combining above Lemma with Lemma \ref{ballSize} we can prove the following lemma
 
 \begin{lemma} \label{sampleAlg}
     Given an undirected \underline{weighted} graph with non-negative weights, a set $X$, $X \subseteq V$ and number $0 < p < 1$, we can compute a sample set
-    $R$ of expected size $O(p*|X|$~log~$|X|)$ such that for every $v \in V$ $C_R(v) \cap X$ is of size at most $4/p$ and expected size of $B_R(v) \cap X$ is less than $1/p$.
+    $R$ of expected size $O(p|X|\log|X|)$ such that for every $v \in V$ $C_R(v) \cap X$ is of size at most $4/p$ and expected size of $B_R(v) \cap X$ is less than $1/p$.
 \end{lemma}
 
 
@@ -771,28 +986,25 @@ By combining above Lemma with Lemma \ref{ballSize} we can prove the following Le
     This will not change the time complexity as $\sum_{v \in V}|B_{A_1}(v)| = \sum_{v \in V}|C_{A_1}(v)|$
     \end{remark}
 
-    The Mikkel Thorup claims that his algorithm can be modified in a similar way (at least for calculating clusters) \cite{a0OraclesBasic},
+    The Thorup claims that his algorithm can be modified in a similar way (at least for calculating clusters) \cite{a0OraclesBasic},
     achieving working time of $O(\xi(B_{A_1}(v)) + |B_{A_1}(v)|) = O(\xi(B_{A_1}(v)))$.
 
-    Lets calculate an upper bound on $\sum_{v \in V} \xi(B_{A_1}(v))$:
+    We will now calculate an upper bound on $\sum_{v \in V} \xi(B_{A_1}(v))$:
+    \begin{align}
+    \sum_{v \in V} \xi(B_{A_1}(v)) &= \sum_{v \in V} \sum_{u \in B_{A_1}(v)} \xi(u) = \nonumber\\
+    &= \sum_{u \in V} \sum_{v \in C_{A_1}(u)} \xi(u) = \nonumber\\
+    &= \sum_{u \in V} |C_{A_1}(u)|\xi(u) \leq \sum_{u \in V} 4\xi(u)/p \leq 8m/p \nonumber
+    \end{align}
 
-    $$\sum_{v \in V} \xi(B_{A_1}(v)) = \sum_{v \in V} \sum_{u \in B_{A_1}(v)} \xi(u) =$$
-    $$= \sum_{u \in V} \sum_{v \in C_{A_1}(u)} \xi(u) =$$
-    $$= \sum_{u \in V} |C_{A_1}(u)|\xi(u) \leq \sum_{u \in V} 4\xi(u)/p \leq 8m/p $$ 
-
-    So the total working time of the above is 
-    \newline
-    $O(m + n $ log $ n + 8m/p + \sum_{v \in V}|B_{A_1}(v)| $ log $|B_{A_1}(v)|) =$
-    \newline
-    $=O(m/p + n/p $ log $n) $
-
+    So the total working time of the above is \newline
+    $O(m + n \log n + 8m/p + \sum_{v \in V}|B_{A_1}(v)| \log |B_{A_1}(v)|) = O(m/p + n/p \log n)$.
 \end{proof}
 
 The above weighted graphs Ball and Cluster computation requires the clusters to be bounded by their size, without it the bound on computation time will increase.
 
 \begin{remark} \label{ballClustersForUniformSample}
-    If $A_1$ would be a set containing uniform sample from $V$ of size $\ceil[\big]{p * |V|}$ instead, then the expected size of $\sum_{v \in V} \xi(B_{A_1}(v))$ would be bounded by Lemma \ref{ballSize} and since $B_X(v) \leq B_Y(v)$ for $X \subseteq Y \subseteq V$, $v \in V$
-    $$\sum_{u \in V} |C_{A_1}(u)|\xi(u) \leq \sum_{u \in V} |C_{A_1}(u)| * n = n * \sum_{u \in V} |C_{A_1}(u)| = n * \sum_{v \in V} |B_{A_1}(v)| \leq n^2/p$$
+    If $A_1$ would be a set containing uniform sample from $V$ of size $\ceil[\big]{p  |V|}$ instead, then the expected size of $\sum_{v \in V} \xi(B_{A_1}(v))$ would be bounded by Lemma \ref{ballSize} and since $B_X(v) \leq B_Y(v)$ for $X \subseteq Y \subseteq V$, $v \in V$
+    $$\sum_{u \in V} |C_{A_1}(u)|\xi(u) \leq \sum_{u \in V} |C_{A_1}(u)|  n = n  \sum_{u \in V} |C_{A_1}(u)| = n  \sum_{v \in V} |B_{A_1}(v)| \leq n^2/p$$
     Which changes the computation time from deterministic $O(m/p + n/p $ log $n) $ to expected $O(n^2/p)$.
 \end{remark}
 
@@ -800,14 +1012,14 @@ For undirected graphs however, computation is much simpler and will work for
 $\mathbf{sample}(V, p)$
 
 \begin{figure}[h]
-    \includegraphics[width=10cm]{images/placeholder_unweightedball}
+    \includegraphics[width=10cm]{images/ball_computation}
     \centering
-    \caption{Placeholder for unweighted ball computation}
+    \caption{Ball in the unweighted graph. Black edges belong to the BFS tree and full black vertices belong to $A_1$.}
 \end{figure}
 
 \begin{lemma} \label{ballClusterUnweighted}
     Given an undirected \underline{unweighted} graph with no multiple edges, number $0 < p < 1$ and
-    uniform sample $S$ from $V$ of size $\ceil[\big]{p * |V|}$
+    uniform sample $S$ from $V$ of size $\ceil[\big]{p  |V|}$
     we can calculate $B_{S}(v)$ and $C_{S}(v)$ for every $v \in V$ in $O(m + n/p^2)$ expected time.
 \end{lemma}
 
@@ -829,27 +1041,30 @@ $\mathbf{sample}(V, p)$
         \item $\psi_1^i$: There is no vertex in the set $\{v_j |0 < j < i\}$ which is selected in the sample $S$.
         \item $\psi_2^i$: There is no vertex in the set $\{v_j |i \leq j \leq n\}$ that is in $S$ and there is edge between it and $v_i$.
     \end{enumerate} 
-    The chance for the $\psi_1^i$ is no more than $(1-p)^{i-1}$ as the chance for $v_j \in S$ is $\ceil[\big]{p * |V|}/|V| \geq p$.
+    The chance for the $\psi_1^i$ is no more than $(1-p)^{i-1}$ as the chance for $v_j \in S$ is $\ceil[\big]{p  |V|}/|V| \geq p$.
     
     If $\psi_1^i$ is true then chance for $\psi_2^i$ is no more than
     \newline
     $(1 - $Pr$[v_j \in S $ for $i < j \leq n ~|~ \psi_1^i])^{\xi'(v_i)}$, where $\xi'(v_i)$ is number of edges connecting $v_i$ with any $v_j$ where $i \leq j \leq n$.
     \newline
-    Pr$[v_j \in S $ for $i < j \leq n ~|~ \psi_1^i] > p$ as $\psi_1^i$ for $i < j \leq n$ increase the chance for $v_j \in S$ that was originally $\ceil[\big]{p * |V|}/|V| \geq p$.
+    Pr$[v_j \in S $ for $i < j \leq n ~|~ \psi_1^i] > p$ as $\psi_1^i$ for $i < j \leq n$ increase the chance for $v_j \in S$ that was originally $\ceil[\big]{p  |V|}/|V| \geq p$.
     That gives Pr$[\psi_2^i ~|~ \psi_1^i] \leq (1-p)^{\xi'(v_i)}$
     \newline
     Now lets look at the expected number of edges processed at least once $-$ it is no more than
-    $$\sum_{i=1}^{n} \text{Pr}[\psi_1^i] * \text{Pr}[\psi_2^i ~|~ \psi_1^i] * \xi'(v_i) \leq \sum_{i=1}^{n} ((1-p)^{i-1} (1-p)^{\xi'(v_i)}\xi'(v_i)) \leq$$
-    $$\leq \sum_{i=1}^{n} ((1-p)^{i-1} \sum_{j=1}^{\xi'(v_i)}(1-p)^{j-1}) \leq 
-    \sum_{i=1}^{n} ((1-p)^{i-1} * 1/p) \leq 1/p * \sum_{i=1}^{n} ((1-p)^{i-1}) \leq 1/p^2$$
-
+    \begin{align}
+    \sum_{i=1}^{n} \text{Pr}[\psi_1^i]  \text{Pr}[\psi_2^i ~|~ \psi_1^i]  \xi'(v_i) &\leq \sum_{i=1}^{n} ((1-p)^{i-1} (1-p)^{\xi'(v_i)}\xi'(v_i)) \leq \nonumber\\
+    &\leq \sum_{i=1}^{n} ((1-p)^{i-1} \sum_{j=1}^{\xi'(v_i)}(1-p)^{j-1}) \leq \nonumber\\
+    &\leq \sum_{i=1}^{n} ((1-p)^{i-1}  1/p) \leq \nonumber\\
+    &\leq 1/p  \sum_{i=1}^{n} ((1-p)^{i-1}) \leq 1/p^2 \nonumber
+    \end{align}
+    As computing $\delta(v, S)$ takes $O(m + n)$ time and for every vertex we process the expected $1/p^2$ edges the total expected time is $O(m + n/p^2)$.
 \end{proof}
 
 
 \section{Preprocessing Memory and Time}
 
 We first compute the $\mathbf{sample}(V, p)$ which consists of while loop with expected $2$ log $n$ iterations,
-in each one we compute uniform sample $S$ in time $O(n)$, and then $B_R(v)$, $C_R(v)$ for $v \in V$, where $R$ contains uniform sample from $V$ of size $\ceil[\big]{p * |V|}$.
+in each one we compute uniform sample $S$ in time $O(n)$, and then $B_R(v)$, $C_R(v)$ for $v \in V$, where $R$ contains uniform sample from $V$ of size $\ceil[\big]{p  |V|}$.
 This can be done by Lemma \ref{ballClusterComputation} and by Observation \ref{ballClustersForUniformSample} for weighted graphs or by Lemma \ref{ballClusterUnweighted} for unweighted graphs.
 We can compute the $B_R(v)$ in $O(m + n^2/p)$ expected time for weighted graphs or $O(m + n/p^2)$ expected time for unweighted graphs.
 The calculation of clusters and their sizes can be done by Observation \ref{ballClusterEquivalence} without affecting the complexity.
@@ -857,8 +1072,8 @@ The total expected time is $O(m $ log $ n + n^2/p $ log $ n)$ for weighted graph
 The balls and clusters have expected size of $O(1/p)$ so they will not take more than $O(n/p $ log $ n)$ expected auxiliary memory.
 
 We can compute $\delta(u,v)$, $p_{A_1}(v)$ for every $u \in A_1$, $v \in V$ by running Dijkstra algorithm for each of the $u \in A_1$.
-However will take $O(|A_1| *(m + n$ log $ n))$ time.
-We can do this faster, in $O(m|A_1|) = O(mnp$ log$ n)$, by using efficient Thorup algorithm for undirected graphs with floating point edge weights \cite{uberDijkstraInt}\cite{uberDijkstraFloat}.
+However this would take $O(|A_1| (m + n\log n))$ time.
+We can do this faster, in $O(m|A_1|) = O(mnp$ log$ n)$, by using Thorups algorithm for undirected graphs with floating point edge weights \cite{uberDijkstraInt, uberDijkstraFloat}.
 For unweighted graphs a simple BFS will be enough.
 Finding $p_{A_1}(v)$ can be done afterwards by checking every distance calculated.
 The expected auxiliary memory is $O(n|A_1|) = O(n^2p$ log$ n)$.
@@ -885,22 +1100,19 @@ As Oracle uses only data structures that were generated during preprocessing the
 
 
 
-
-
-
 \chapter{Removing the Log Factors} \label{21TheoreticalComparison}
 
-\section{Oracle by Mihai Patrascu and Liam Roditty} \label{21OraclePatRod}
+\section{Oracle by Patrascu and Roditty} \label{21OraclePatRod}
 
-We present the slightly modified $(2,1)-approximate$ distance oracle of Mihai Patrascu and Liam Roditty \cite{21OracleLessMemory}
+We present the slightly modified $(2,1)-approximate$ distance oracle of Patrascu and Roditty \cite{21OracleLessMemory}
 
 \noindent\fbox{
     \begin{minipage}{\textwidth -14.1pt}
     algorithm $\mathbf{preproPatRod}(G)$
 
-    let $R$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-1/3} * n}$ 
+    let $R$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-1/3}  n}$ 
     
-    let $S$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-2/3} * n}$
+    let $S$ be an uniform sample from $V$ of size $\ceil[\big]{n^{-2/3}  n}$
 
     let $A_1 \leftarrow R \cup \bigcup_{u \in S} B_R(u)$
 
@@ -925,9 +1137,9 @@ We present the slightly modified $(2,1)-approximate$ distance oracle of Mihai Pa
     \end{minipage}
 }
 
-The only difference between this Oracle and Oracle from chapter \ref{21DistanceOracle} is that this oracle
-constructs $A_1$ by adding $B_R(u)$, $u \in S$ to the set $R$, instead of adding \~log $n$ sets of size $R$ to the set $R$, which reduces the memory complexity by log $n$.
-Here we get a weaker bound on $C_{A_1}(v)$, $v \in V$, which fortunately is claimed to not increase preprocessing time for sparse graphs too much \cite{21OracleSpannerNoPenaltyNoLog}.
+The only difference between this oracle and oracle from Chapter \ref{21DistanceOracle} is that this oracle
+constructs $A_1$ by adding $B_R(u)$, $u \in S$ to the set $R$, instead of adding $O(\log n)$ sets of size $R$ to the set $R$, which reduces the memory complexity by log $n$.
+Here we get a weaker bound on $C_{A_1}(v)$, $v \in V$, which fortunately is claimed by Knudsen to not increase preprocessing time for sparse graphs too much \cite[Chapter 4, Lemma 10]{21OracleSpannerNoPenaltyNoLog}.
 
 \begin{lemma} \label{patRodBallIntersections}
     There is at most $O(n^{5/3})$ expected pairs of vertices $(u, v) \in V \times V$
@@ -936,16 +1148,16 @@ Here we get a weaker bound on $C_{A_1}(v)$, $v \in V$, which fortunately is clai
 \end{lemma}
 
 \begin{proof}
-    We will proof the Lemma by showing that for $u \in V$ expected number of balls intersecting with $B_{A_1}(u)$ is less than $n^{2/3}$.
+    We will proof the lemma by showing that for $u \in V$ expected number of balls intersecting with $B_{A_1}(u)$ is less than $n^{2/3}$.
 
-    The program generates first the sample $R$.
+    The algorithm generates first the sample $R$.
     Let $u_1, u_2, \ldots, u_n$ be the elements of $V$ arranged in any non-decreasing order of distance from $u$.
 
     Now let $w_1, w_2, \ldots, w_n$ be the elements of $V$ arranged in any order such that if $i \leq j$ then 
     for every $l$ such that $w_j \in C_R(u_l)$ there is such $k$ that $w_i \in C_R(u_k)$ we have $k \leq l$.
     In other words we order the vertices by the first cluster (the one with the smallest $i$) $C_R(u_i)$, $i \in \{1, \ldots, n\}$ that it belongs to.
 
-    Now the program generates the sample $S$. What is the expected size of the set $L = \{w_1, w_2, \ldots, w_l\}$ such that $L \cap S = \emptyset$ and $L$ is largest possible?
+    Now the algorithm generates the sample $S$. What is the expected size of the set $L = \{w_1, w_2, \ldots, w_l\}$ such that $L \cap S = \emptyset$ and $L$ is largest possible?
 
     $$\mathbf{E}[|L|] = \sum_{i=1}^{n} \text{Pr}[w_i \in L] =\sum_{i=1}^{n} \text{Pr}[\{w_1, w_2, \ldots, w_i\} \cap S = \emptyset] \leq $$
     $$\leq \sum_{i=1}^{n} \sum_{j=1}^{i} Pr[w_j \notin S] \leq \sum_{i=1}^{n} (1 - n^{-2/3})^i < n^{2/3}$$
@@ -975,9 +1187,9 @@ Here we get a weaker bound on $C_{A_1}(v)$, $v \in V$, which fortunately is clai
     This points to:
 
     $$\sum_{v \in V}|C_{A_1}(v)|^2 = \sum_{v \in V}\sum_{u \in C_{A_1}(v)}|C_{A_1}(v)| = \sum_{u \in V}\sum_{v \in B_{A_1}(u)} |C_{A_1}(v)| \leq$$
-    $$\leq \sum_{u \in V}\sum_{v \in B_{A_1}(u)} L_u = \sum_{u \in V} |B_{A_1}(u)| * L_u \leq \sum_{u \in V} |B_R(u)| * L_u$$
-    $$\mathbf{E}[\sum_{v \in V}|C_{A_1}(v)|^2] \leq \mathbf{E}[\sum_{u \in V} |B_R(u)| * L_u] = \sum_{u \in V} \mathbf{E}[|B_R(u)| * L_u] \leq n * n^{1/3} * n^{2/3} = n^2$$
-    as our upper bounds on $\mathbf{E}[|B_R(u)|]$ and $\mathbf{E}[L_u]$ are independent $-$ we generate the $B_R(u)$ and $w_1, w_2, \ldots, w_n$ (for a given $u$) based on sample $R$ and graph $G$
+    $$\leq \sum_{u \in V}\sum_{v \in B_{A_1}(u)} L_u = \sum_{u \in V} |B_{A_1}(u)|  L_u \leq \sum_{u \in V} |B_R(u)|  L_u$$
+    $$\mathbf{E}[\sum_{v \in V}|C_{A_1}(v)|^2] \leq \mathbf{E}[\sum_{u \in V} |B_R(u)|  L_u] = \sum_{u \in V} \mathbf{E}[|B_R(u)|  L_u] \leq n  n^{1/3}  n^{2/3} = n^2$$
+    as our upper bounds on $\mathbf{E}[|B_R(u)|]$ and $\mathbf{E}[|L_u|]$ are independent $-$ we generate the $B_R(u)$ and $w_1, w_2, \ldots, w_n$ (for a given $u$) based on sample $R$ and graph $G$
     and then we generate random sample $S$ that gives us $L_u$ together with its upper bound, while $B_R(u)$ remains unaffected
 \end{remark}
 
@@ -999,14 +1211,18 @@ The total expected time is $O(n^{2} + mn^{2/3})$ (or $O(mn^{2/3})$ by claim from
 
 \section{Further Improvements}
 
+With small modifications, the presented oracles are also able to retrieve the paths realizing the approximation in constant time per edge.
+
+If we additionally remember the distances between vertices, that have their balls connected by a single edge, we can construct $(2,0)$ distance oracle for weighted graphs with $O(n^{4/3}m^{1/3})$ expected memory in a similar way \cite{21OracleLessMemory}
+
 The Oracle preprocessing time could be further improved to $O(n^2)$ by applying spanners $-$ subgraphs of a graph that have less edges than original
 but the distances between nodes are preserved up to some error (usually additive or multiplicative).
-This however comes with the drawbacks as either the distance approximation is worse $-$ stretch $(2,3)$ \cite{21OracleBasic} or the oracle becomes more complicated \cite{21OracleSpannerNoPenalty} \cite{21OracleSpannerNoPenaltyNoLog}
+This however comes with the drawbacks as either the distance approximation is worse $-$ stretch $(2,3)$ \cite{21OracleBasic} or the oracle becomes more complicated \cite{21OracleSpannerNoPenalty, 21OracleSpannerNoPenaltyNoLog}
 However using spanners will only improve the preprocessing time for graphs with $\omega(n^{4/3})$ edges, as currently known construction of good enough spanner takes $\Theta(n^2)$ time.
 
-The Oracle can be generalized similar to Oracle from Chapter \ref{30DistanceOracle} to produce $(2k - 2, 1)-approximate$ distance oracle of size $O(n^{1 + 2/(2k-1)})$ \cite{a1Oracle}
+The Oracle can be generalized similar to Oracle from Chapter \ref{30DistanceOracle} to produce $(2k - 2, 1)-approximate$ distance oracle of size $O(n^{1 + 2/(2k-1)})$ \cite{a1Oracle}.
 
-The are also more efficient algorithms for the special classes of graphs $-$ sparse graphs, planar graphs.
+The are also more efficient algorithms for the special classes of graphs, like planar graphs.
 
 
 \chapter{Results} \label{21PracticalComparison}
@@ -1019,7 +1235,7 @@ The are also more efficient algorithms for the special classes of graphs $-$ spa
 
 In the following we will call minimal perfect hash functions simply a perfect hash functions.
 
-The hash table used in the programs is PTHash \cite{hashTablePractical}, minimal perfect hash algorithm
+The hash table used in the programs is PTHash \cite{hashTablePractical}, minimal perfect hash algorithm.
 The implementation of PTHash is written in C++ and available at
 \newline 
 \url{https://github.com/jermp/pthash}
@@ -1029,17 +1245,17 @@ but only $O(n^{5/3})$ write operations. However, the practical construction time
 
 \section{Programs Compared}
 
-The first program marked as $\mathbf{BFS}$ compared is an Oracle with $A_1 = V$, 
+The first program marked as $\mathbf{BFS}$ compared is an oracle with $A_1 = V$, 
 every exact distance is calculated by $BFS$ algorithm and stored in memory.
 This is our control sample.
 
-The second program $\mathbf{Basic}$ is an Oracle with $A_1$ being an uniform sample from $V$ of size $\ceil[\big](p*|V|) = \ceil[\big](n^{2/3})$.
-Its the most basic $(2,1)$ Distance Oracle without any expansion of the $A_1$ that would ensure small number of ball intersections.
-This Oracle have expected memory of $\Omega(n^{7/3})$ for some graphs.
+The second program $\mathbf{Basic}$ is an oracle with $A_1$ being an uniform sample from $V$ of size $\ceil[\big](p|V|) = \ceil[\big](n^{2/3})$.
+It is the most basic $(2,1)-$distance oracle without any expansion of the $A_1$ that would ensure small number of ball intersections.
+This oracle have expected memory of $\Omega(n^{7/3})$ for some graphs.
 
 The third program $\mathbf{BasGoySen}$ is Chapter \ref{21DistanceOracle}. Sample $A_1$ is expanded by vertices with big clusters until none remains.
 
-The fourth and the last program $\mathbf{PatRod}$ is Chapter \ref{21TheoreticalComparison} section \ref{21OraclePatRod} Oracle. Sample $A_1$ is expanded by random balls.
+The fourth and the last program $\mathbf{PatRod}$ is Chapter \ref{21TheoreticalComparison} Section \ref{21OraclePatRod} oracle. Sample $A_1$ is expanded by random balls.
 
 As the programs are very similar, we run the same tests with the same seed for all random sampling (different tests have different seeds).
 This ensures that the first sample will be the same for all programs, removing some noise from our comparison.
@@ -1053,20 +1269,117 @@ The Oracles were tested on random graphs with $n = 2000 \pm 100$ in order to avo
 The number of edges was randomly chosen from $n^a(n - 1)/10$ to $n^a(n-1)/2$ for a parameter $0 \leq a \leq 1$.
 Edges themselves were an uniform sample from all possible edges (no loops and multiple edges).
 
+\begin{figure}[H]
+    \begin{tikzpicture}
+        \centering
+        \begin{semilogyaxis}[
+            % title={Preprocessing Time},
+            width=12cm,
+            xlabel={Parameter $a$},
+            ylabel={Preprocessing Time [seconds]},
+            xmin=0, xmax=1,
+            x dir = reverse,
+            ymin=0.01, ymax=100,
+            xtick={1.0,0.75,0.5,0.25,0.0},
+            ytick={0.01,0.1,1,10,100},
+            legend pos=north east,
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+            \addplot[
+                color=red!50!green!50!blue!50,
+                mark=square,
+            ] coordinates {
+                (0.0,0.0428)(0.25,0.2460)(0.5,0.9339)(0.75,6.2580)(1,42.2736)
+            };
+            \addplot[
+                color=red,
+                mark=otimes,
+            ] coordinates {
+                (0.0,0.0464)(0.25,0.1500)(0.5,0.1373)(0.75,0.5368)(1,3.4243)
+            };
+            \addplot[
+                color=blue,
+                mark=triangle,
+            ] coordinates {
+                (0.0,0.0484)(0.25,0.1554)(0.5,0.1399)(0.75,0.5411)(1,3.4170)
+            };
+            \addplot[
+                color=green,
+                mark=diamond,
+            ] coordinates {
+                (0.0,0.0471)(0.25,0.1082)(0.5,0.1399)(0.75,0.5764)(1,3.6729)
+            };
+            \legend{$\mathbf{BFS}$,$\mathbf{Basic}$,$\mathbf{BaGoSe}$,$\mathbf{PatRod}$}
+        \end{semilogyaxis}
+    \end{tikzpicture}
+    \caption{Preprocessing Time for $n = 2000 \pm 100$, Random Graph, arithmetic average of $10$ tests}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{tikzpicture}
+        \centering
+        \begin{axis}[
+            % title={Preprocessing Time},
+            width=12cm,
+            xlabel={Parameter $a$},
+            ylabel={Memory needed [$n|A_1| + |\mathcal{O}|$]},
+            xmin=0, xmax=1,
+            x dir = reverse,
+            ymin=0, ymax=1000000,
+            xtick={1.0,0.75,0.5,0.25,0.0},
+            ytick={200000,400000,600000,800000},
+            scaled y ticks={base 10:-5},
+            legend pos=north east,
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+            % \addplot[
+            %     color=red!50!green!50!blue!50,
+            %     mark=square,
+            % ] coordinates {
+            %     (0.0,4.0401e+06)(0.25,3.8929e+06)(0.5,3.9849e+06)(0.75,3.9954e+06)(1,3.9756e+06)
+            % };
+            \addplot[
+                color=red,
+                mark=otimes,
+            ] coordinates {
+                (0.0,321056 + 14910.9)(0.25,311392 + 122816)(0.5,317416 + 32557.1)(0.75,318240 + 2010.2)(1,316860 + 1834.4)
+            };
+            \addplot[
+                color=blue,
+                mark=triangle,
+            ] coordinates {
+                (0.0,321056 + 14910.9)(0.25,311392 + 122816)(0.5,317416 + 32557.1)(0.75,318240 + 2010.2)(1,316860 + 1834.4)
+            };
+            \addplot[
+                color=green,
+                mark=diamond,
+            ] coordinates {
+                (0.0,364936 + 14202.8)(0.25,464122 + 63118.9)(0.5,409890 + 16005.1)(0.75,342014 + 1921.9)(1,341175 + 1822.2)
+            };
+            \legend{$\mathbf{Basic}$,$\mathbf{BaGoSe}$,$\mathbf{PatRod}$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Memory needed for $n = 2000 \pm 100$, Random Graph, arithmetic average of $10$ tests, calculated as number of distances that need to be stored.
+        Note that memory for the perfect hash functions and $p_{A_1}(v)$ for $v \in V$ was not included. If the $\mathcal{O}$ stores distances instead of vertices we do not need to store balls.}
+\end{figure}
+
 The following quantities were measured:
 \begin{itemize}
     \item Preprocessing Time $-$ Time taken (in seconds) from the moment after input was loaded into memory to the moment oracle is ready to answer queries.
     \item Average Query Time $-$ Time taken (in seconds) to report $\hat{\delta}(u, v)$, for every $u, v \in V$ divided by $|V|^2$.
     \item Size of the Set $A_1$ $-$ self explanatory.
-    \item $n*|A_1|$ $-$ Memory needed (in machine words) to store $\delta(u, v)$, for every $u \in A_1$, $v \in V$.
+    \item $n|A_1|$ $-$ Memory needed (in machine words) to store $\delta(u, v)$, for every $u \in A_1$, $v \in V$.
     \item Sum of Ball sizes $-$ $\sum_{v \in V} |B_{A_1}(v)| = \sum_{v \in V} |C_{A_1}(v)|$ $-$ Memory needed (in machine words) to store $\delta(v, u)$, for every $v \in V$, $u \in B_{A_1}(v)$.
+    \item $|\mathcal{O}|$ $-$ Count of pairs of vertices $(u,v) \in V \times V$ such that their balls intersect $B_{A_1}(u) \cap B_{A_1}(v) \neq \emptyset$.
     \item Space PHFs $B_{A_1}$ $-$ Memory needed (in bits) to store the perfect hash function for every $B_{A_1}(v)$, $v \in V$ that allows to access any ball element in constant time, while not using additional memory. 
             The hash function generator seems to struggle with low key numbers, hence large number of bits for empty balls. This could be fixed by combining all functions into one, if needed.
     \item Space PHFs $\mathcal{O}$  $-$ Memory needed (in bits) to store the perfect hash function for table $\mathcal{O}$.
     \item Average Relative Error $-$ Arithmetic average of errors calculated\newline 
             as $(\hat{\delta(u,v)} - \delta(u,v)) / \delta(u,v)$.
             If $\delta(u,v) = 0$ or there is no path between $u$ and $v$, all oracles recognize it flawlessly and hence the error is $0$.
-    \item Worst Error percentage $-$ The number of times the reported distance was $2*\delta(u, v) + 1$ divided by number of all distances reported.
+    \item Worst Error percentage $-$ The number of times the reported distance was $2\delta(u, v) + 1$ divided by number of all distances reported.
 \end{itemize}
 
 \begin{table}[H] \label{test:random.a10}
@@ -1082,7 +1395,7 @@ The following quantities were measured:
         \hline
         $|A_1|$                         & 1993.3     & 158.9      & 158.9       & 171.1      \\
         \hline
-        $n * |A_1|$                     & 3.9756e+06 & 316860     & 316860      & 341175     \\
+        $n |A_1|$                       & 3.9756e+06 & 316860     & 316860      & 341175     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 1834.4     & 1834.4      & 1822.2     \\
         \hline
@@ -1121,7 +1434,7 @@ The errors are surprisingly large considering that most if not all distances are
         \hline
         $|A_1|$                         & 1998.3     & 159.2      &  159.2      & 171.1      \\
         \hline
-        $n * |A_1|$                     & 3.9954e+06 & 318240     &  318240     & 342014     \\
+        $n |A_1|$                       & 3.9954e+06 & 318240     &  318240     & 342014     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 1892.2     & 1892.2      & 1857.9     \\
         \hline
@@ -1159,7 +1472,7 @@ And smaller errors both average and percent of worst case by about factor of $2/
         \hline
         $|A_1|$                         & 1995.9     & 159        & 159         & 205.1      \\
         \hline
-        $n * |A_1|$                     & 3.9849e+06 & 317416     & 317416      & 409890     \\
+        $n |A_1|$                       & 3.9849e+06 & 317416     & 317416      & 409890     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 6785.7     & 6785.7      & 4650.3     \\
         \hline
@@ -1197,7 +1510,7 @@ As balls grow in size the Worst Error Percentage drops rapidly, while the averag
         \hline
         $|A_1|$                         & 1972.2     & 157.8      & 157.8       & 234.7      \\
         \hline
-        $n * |A_1|$                     & 3.8929e+06 & 311392     & 311392      & 464122     \\
+        $n |A_1|$                       & 3.8929e+06 & 311392     & 311392      & 464122     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 12177.8    & 12177.8     & 8636.1     \\
         \hline
@@ -1236,7 +1549,7 @@ The Average Error drops as usual.
         \hline
         $|A_1|$                         & 2008.9     & 159.7      & 159.7       & 181.5      \\
         \hline
-        $n * |A_1|$                     & 4.0401e+06 & 321056     & 321056      & 364936     \\
+        $n |A_1|$                       & 4.0401e+06 & 321056     & 321056      & 364936     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3521.7     & 3521.7      & 3432.8     \\
         \hline
@@ -1276,7 +1589,7 @@ rarely contain each other as their size is unlikely to be large. This hints that
 
 In order to generate graphs where large clusters are likely, we decided to split the vertices into two sets $-$ the dense core and sparse corona.
 To simplify analysis the graph will be bipartite with edges only occurring between core and corona,
-and the core will have size $1/p$, so the sample $S$ of size $p * n$ will have reasonable chance of missing the core,
+and the core will have size $1/p$, so the sample $S$ of size $p  n$ will have reasonable chance of missing the core,
 resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ preprocessing time and $\Omega(n^2)$ memory if our star graph have a lot of edges.
 
 \begin{table}[H]
@@ -1292,7 +1605,7 @@ resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ preprocessing time and $
         \hline
         $|A_1|$                         & 1995.8     & 159.05     & 171.3       & 181.45      \\
         \hline
-        $n * |A_1|$                     & 3.9855e+06 & 317550     & 342000      & 362224     \\
+        $n  |A_1|$                     & 3.9855e+06 & 317550     & 342000      & 362224     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 5542.25    & 1824.5      & 1914.5     \\
         \hline
@@ -1327,7 +1640,7 @@ resulting in $\sum_{v \in V}|C_S(v)|^2 = \Omega(n^2/p)$ preprocessing time and $
         \hline
         $|A_1|$                         & 1984.05    & 158.4      & 170.1       & 177.2      \\
         \hline
-        $n * |A_1|$                     & 3.9389e+06 & 314404     & 337636      & 351724     \\
+        $n  |A_1|$                     & 3.9389e+06 & 314404     & 337636      & 351724     \\
         \hline
         $\sum_{v \in V} |B_{A_1}(v)| $  & 0          & 3316.45    & 1836        & 2154.65    \\
         \hline
@@ -1358,15 +1671,15 @@ The Star Like graphs from the previous section have one important flaw $-$
 when a vertex from the core is added to the sample most of the balls it is contained in will have radius equal to $1$ and thus size equal to $1$.
 This however can be fixed by slightly modifying the construction.
 
-We present the graph for which $\mathbf{sample}(V, n^{-1/3})$ requires $\Omega($ log $n)$ expected number of steps.
+We present the graph for which $\mathbf{sample}(V, n^{-1/3})$ requires $\Omega(\log n)$ expected number of steps.
 
-We first split the graph into $n*p/(2q)$ disjoint parts $G_1, G_2, \ldots, G_{n*p/(2q)}$, where $p = n^{-1/3}$ and $q \geq 8$ is a constant.
+We first split the graph into $np/(2q)$ disjoint parts $G_1, G_2, \ldots, G_{np/(2q)}$, where $p = n^{-1/3}$ and $q \geq 8$ is a constant.
 Each of the parts is constructed as follows:
 \begin{itemize}
-    \item Let $D_1, D_2, \ldots, D_{p^{-1/3}}$ be the disjoint sets of vertices of size $1/p * p^{1/3}$. We will call them the (dense) core.
-    \item Let $S_1, S_2, \ldots, S_{p^{-1/3}}$ be the disjoint sets of vertices of size $q/p * p^{1/3}$. We will call them the (sparse) corona.
+    \item Let $D_1, D_2, \ldots, D_{p^{-1/3}}$ be the disjoint sets of vertices of size $1/p  p^{1/3}$. We will call them the (dense) core.
+    \item Let $S_1, S_2, \ldots, S_{p^{-1/3}}$ be the disjoint sets of vertices of size $q/p  p^{1/3}$. We will call them the (sparse) corona.
     \item Now for every $i, j \in \{1, 2, \ldots p^{-1/3}\}$ we will connect all vertices of $D_i$ to $w_1$, all vertices of $S_j$ to $w_{p^{1/3} + i}$ and every vertex $w_k$ to $w_{k+1}$ for $1 \leq k < p^{-1/3} + i$,
-            where $w_1, w_2, \ldots, w_{p^{-1/3} + i}$ is a set of vertices $J_{(i, j)}$ called joint of size at most $2 * p^{-1/3}$.
+            where $w_1, w_2, \ldots, w_{p^{-1/3} + i}$ is a set of vertices $J_{(i, j)}$ called joint of size at most $2  p^{-1/3}$.
 \end{itemize}
 All sets $D_i, S_j, J_{(i, j)}$ are disjoint and their combined size totals to at most $(q + 3)/p < 2q/p$.
 
@@ -1376,31 +1689,31 @@ For simplicity we will consider only the clusters of core vertices.
 For a part to contain no large clusters ($> 4/p$) one of the following conditions must be satisfied:
 \begin{enumerate}
     \item $\psi_1$ there is a vertex $u$ that is in the sample and belongs to $D_1 \cup_{j=1}^{p^{-1/3}} J_{(1, j)}$.
-    \item $\psi_2$ there is less than $4/q * p^{-1/3}$ sets $S_j \cup_{i=1}^{p^{-1/3}} J_{(i, j)}$ that do not have any of the vertices in the sample.
+    \item $\psi_2$ there is less than $4/q  p^{-1/3}$ sets $S_j \cup_{i=1}^{p^{-1/3}} J_{(i, j)}$ that do not have any of the vertices in the sample.
 \end{enumerate}
 if neither of the above holds then all vertices from sets $S_j$ from the $\psi_2$ condition contain $D_1$ resulting in clusters from $D_1$ being $\geq 4/p + p^{-1/3} + 1$.
 
-What is the expected number $\mathbf{E}[t]$ of vertices from a given $G_k$, $1 \leq k \leq n*p/(2q)$ that will get added to the sample?
+What is the expected number $\mathbf{E}[t]$ of vertices from a given $G_k$, $1 \leq k \leq np/(2q)$ that will get added to the sample?
 For the $\psi_1$ to occur the set of size $3/p^{2/3}$ must be hit. However the chance for next sampled vertex to hit this set is less than: (assuming no $\psi_2$ have occurred)
 $$\frac{3/p^{2/3}}{l/p^{2/3}}$$
 where $1 \leq l \leq p^{-1/3}$ is the largest integer such that $\cup_{i=1}^{l} (D_1 \cup_{j=1}^{p^{-1/3}} J_{(1, j)})$ does not contain any sampled vertex.
-For the $\psi_2$ to occur $t$ must be not less than $1/2 * p^{-1/3}$ as $q \geq 8$.
+For the $\psi_2$ to occur $t$ must be not less than $1/2  p^{-1/3}$ as $q \geq 8$.
 
 For every $x$ we will estimate the upper bound $\phi(x)$ on the number of core sets $D_1, D_2, \ldots D_{\phi(x)}$ where every vertex is a large cluster, needed for $\mathbf{E}[t]$ to be at least $x$ on condition that $t \leq 2x$.
-If $2x < 1/2 * p^{-1/3}$ then $\psi_2$ does not hold, so we will assume that $\psi_2$ is false.
+If $2x < 1/2  p^{-1/3}$ then $\psi_2$ does not hold, so we will assume that $\psi_2$ is false.
 
 Note that for the sets $D_1, D_2, \ldots D_{\phi(x)}$ to be large it is sufficient that there is no vertices from $\cup_{i=1}^{\phi(x)}(D_i \cup_{j=1}^{p^{-1/3}} J_{(i, j)})$ in the sample, and $\psi_2$ is false.
 
 The estimate will be calculated by induction
-Suppose that $\phi(x - 0.5) = a$, then $\phi(x) = 4*a$, as adding vertex to the sample have at most $a * 3 / (a * 3 + (4-1)*a) \leq 1/2$ chance of hitting the $D_1, D_2, \ldots, D_a$ or their joints, which results in $\mathbf{E}[t] \geq x - 0.5$ on condition $t \leq 2x - 1$ and
+Suppose that $\phi(x - 0.5) = a$, then $\phi(x) = 4a$, as adding vertex to the sample have at most $a  3 / (a  3 + (4-1)a) \leq 1/2$ chance of hitting the $D_1, D_2, \ldots, D_a$ or their joints, which results in $\mathbf{E}[t] \geq x - 0.5$ on condition $t \leq 2x - 1$ and
 when those sets were not hit the $\mathbf{E}[t] \geq x - 0.5 + 1$ on condition $t \leq 2x$ as we have at least $a$ core sets with large clusters. This combined gives $\mathbf{E}[t] \geq x$ on condition $t \leq 2x$
 
 The $\phi(1) = 1$ on condition $t \leq 1 < 2$ as we need at least one additional vertex in sample to satisfy $\psi_1$.
 The largest $x$ such that $\phi(x) \leq p^{-1/3}$ is $\floor($log$_{16}~p^{-1/3}) + 1$.
 
 This concludes that expected size of the sample from $\mathbf{sample}(V, p)$ is not less than
-$n*p/(2q) * $log$_2~p^{-1/3}/4 = n*p/q * ($log$_2~ n)/72 = \Omega(n*p * \frac{\text{log}~n}{q})$.
-As in each step the sample from $\mathbf{sample}(V, p)$ grows by $\ceil(p*n)$ we have $\Omega(n*p $log$ n)$ expected steps for small constant $q$ (like $q = 8$).
+$np/(2q)  $log$_2~p^{-1/3}/4 = np/q  ($log$_2~ n)/72 = \Omega(np  \frac{\text{log}~n}{q})$.
+As in each step the sample from $\mathbf{sample}(V, p)$ grows by $\ceil(pn)$ we have $\Omega(np $log$ n)$ expected steps for small constant $q$ (like $q = 8$).
 
 The $\mathbf{BaGoSe}$ memory and expected preprocessing time log factors therefore are tight $-$ there are graphs where $\mathbf{BaGoSe}$ takes $\Theta(n^{5/3} $ log $n)$ memory and $\Theta(mn^{2/3} $ log $n)$ expected preprocessing time.
 % The above graph have $m = \Theta(n^{10/9})$ edges.
@@ -1446,15 +1759,16 @@ $Parallel$ $Algorithms$ $and$ $Architectures$ $(SPAA)$, pages 1–10, 2001.
 M. Thorup and U. Zwick. Approximate distance oracles. $Journal$ $of$ $Association$ $of$ $Computing$
 $Machinery$, 52:1–24, 2005.
 
+\bibitem{a0OraclesMN1KDeterministicTime} 
+Liam Roditty, Mikkel Thorup, and Uri Zwick. Deterministic constructions of approximate
+distance oracles and spanners. In $International$ $Colloquium$ $on$ $Automata,$ $Languages,$ $and$
+$Programming$, pages 261–272. Springer, 2005.
+
 \bibitem{a0OraclesN2Time} 
 Surender Baswana and Sandeep Sen. Approximate distance oracles for unweighted graphs
 in expected $O(n^2)$ time. $ACM$ $Transactions$ $on$ $Algorithms$, 2(4):557–577, 2006. Announced
 at SODA 2004. doi:10.1145/1198513.1198518.
 
-\bibitem{a0OraclesMN1KDeterministicTime} 
-Liam Roditty, Mikkel Thorup, and Uri Zwick. Deterministic constructions of approximate
-distance oracles and spanners. In $International$ $Colloquium$ $on$ $Automata,$ $Languages,$ $and$
-$Programming$, pages 261–272. Springer, 2005.
 
 \bibitem{21OracleBasic}
 Surender Baswana, Vishrut Goyal, and Sandeep Sen. $All-pairs$ $nearly$ $2-approximate$ $shortest$ 
