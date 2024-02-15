@@ -11,31 +11,30 @@
 % złamaniu wierszy w temacie pracy, zwłaszcza tego w jezyku pracy. Uzyj do tego
 % polecenia \fmlinebreak.
 \englishtitle   {Experimental Comparison of \fmlinebreak (2,1)-Distance~Oracles}
-\polishtitle    {Eksperymentalne porównanie \fmlinebreak wyroczni~odległości~(2,1)}
+\polishtitle    {Eksperymentalne porównanie \fmlinebreak (2,1)-wyroczni~odległości}
 \englishabstract{
     Let $G~=~(V,~E)$ be an undirected unweighted graph with $|V|~=~n$ vertices and $|E|~=~m$ edges.
     Let $\delta(u,~v)$ denote the distance between vertices $u,~v~\in~V$.
     An $(\alpha,\beta)-approximate$ distance oracle for $G$ is a data structure that supports the following queries between pairs of vertices in $G$:
-    given two vertices $u,~v$ it can compute a distance estimate $\hat{\delta}(u,~v)$ that satisfies 
+    given two vertices $u,~v \in V$ it can compute a distance estimate $\hat{\delta}(u,~v)$ that satisfies 
     $$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
-    What is remarkable that there exists $(\alpha,\beta)-approximate$ distance oracles it that can take significantly less than quadratic space,
-    but still answer distance queries in constant time, despite quadratic space structure required to retrieve exact distances.
+    What is remarkable that there exist $(\alpha,\beta)-approximate$ distance oracle that can take significantly less than quadratic space,
+    but can answer distance queries in constant time, despite quadratic space structure required to retrieve exact distances.
     The $(3,0)-approximate$ distance oracle by Thorup and Zwick is the most precise oracle that have $\beta=0$ and takes subquadratic memory $-$ $O(n^{3/2})$.
-    By using the additive error $-$~$\beta>0$ we are able to decrease $\alpha$ to $2$, while retaining subquadratic memory $-$ $(2,1)$ distance oracle by Baswana, Goyal and Sen takes only $O(n^{5/3})$ memory.
+    By using the additive error $-$~$\beta>0$ we are able to decrease $\alpha$ to $2$, using slightly more memory, but still subquadratic memory $-$ $(2,1)$ distance oracle by Baswana, Goyal and Sen takes only $O(n^{5/3})$ memory.
     In this thesis we will compare $(2,1)-approximate$ distance oracles on different graph sets, looking at their memory use, query time and average error.
     We will also compare the preprocessing time.
 }
-\polishabstract { % TODO: name creators of the oracle remove constant time
+\polishabstract {
     Niech $G~=~(V,~E)$ będzie nieskierowanym, nieważonym grafem, gdzie $n~=~|V|$ jest liczbą wierzchołków, a $m~=~|E|$ liczbą krawędzi.
     Oznaczmy jako $\delta(u,~v)$ odległość pomiędzy wierzchołkami $u,~v~\in~V$.
-    $(\alpha,\beta)$-przybliżoną wyrocznią odległości grafu $G$, gdzie $\alpha~\geq 1,~\beta~\geq~0$ nazwiemy strukturę danych, która umożliwia następujące zapytania o odległości pomiędzy parami wierzchołków $G$:
-    Mając wierzchołki $u,~v$ możemy w stałym czasie policzyć przybliżoną odległość $\hat{\delta}(u,~v)$, która spełnia 
+    $(\alpha,\beta)-przybliżoną$ wyrocznią odległości grafu $G$, gdzie $\alpha~\geq 1,~\beta~\geq~0$ nazwiemy strukturę danych, która umożliwia następujące zapytania:
+    Mając wierzchołki $u,~v \in V$ możemy policzyć przybliżoną odległość $\hat{\delta}(u,~v)$, która spełnia 
     $$\delta(u,~v)~\leq~\hat{\delta}(u,~v)~\leq~\alpha\delta(u, v)~+~\beta$$
-    Ta struktura może zajmować mniej niż kwadratowo wiele pamięci, ale odpowiedzi na zapytania, których wszystkich możliwych jest kwadratowo wiele, pozostają w czasie stałym.
-    \newline 
-    Wyrocznia odległości~$(3,0)$ jest najdokładniejszą wyrocznią, która ma $\beta=0$ i dodatkowo zajmuje tylko $O(n^{2-\epsilon})$ pamięci $-$ dokładniej $O(n^{3/2})$.
-    Jednak używając błędu addytywnego $-$~$\beta>0$ jesteśmy w stanie zmniejszyć $\alpha$ do $2$ zachowując pamięć $O(n^{2-\epsilon})$ $-$ wyrocznia odległości~$(2,1)$ zajmuje jedynie $O(n^{5/3})$ pamięci.
-    W poniższej pracy porównamy na różnych zestawach grafów kilka wyroczni odległości (2,1) pod względem ich zajmowanej pamięci, szybkości działania i średniego błędu.
+    Istnieją $(\alpha,\beta)-przybliżone$ wyrocznie odległości, które zajmują mniej niż kwadratowo wiele pamięci, ale odpowiedzi na zapytania zwraca w stałym czasie, pomimo, że zwrócenie dokładnych odległości w stałym czasie wymaga struktury używającej kwadratowo wiele pamięci.
+    $(3,0)-przybliżona$ wyrocznia odległości Thorupa i Zwicka jest najdokładniejszą wyrocznią, która ma $\beta=0$ i dodatkowo zajmuje mniej niż kwadratowo wiele pamięci $-$ $O(n^{3/2})$.
+    Jednak używając błędu addytywnego $-$~$\beta>0$ jesteśmy w stanie zmniejszyć $\alpha$ do $2$, zajmując trochę więcej pamięci, ale wciąż mniej niż kwadratowo wiele $-$ $(2,1)-przybliżona$ wyrocznia odległości Baswana, Goyala i Sena zajmuje jedynie $O(n^{5/3})$ pamięci.
+    W poniższej pracy porównamy kilka $(2,1)-przybliżonych$ wyroczni odległości na różnych zestawach grafów, porównamy ich zajmowaną pamięć, szybkość działania i średni błąd.
     Porównamy również czas, jaki zajmuje stworzenie wyroczni.
 
 }
